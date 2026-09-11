@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ABCD Ingénierie, bureau d'études structure spécialisé bois et métal." />
+    <title>ABCD Ingénierie — Bureau d'études structure bois et métal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { ink: '#202326', steel: '#67686A', oak: '#C99358', copper: '#C96B1B', paper: '#F8F7F4' },
+            fontFamily: { sans: ['Montserrat', 'Arial', 'sans-serif'] },
+            letterSpacing: { label: '.16em' }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style type="text/tailwindcss">
+      @layer base {
+        html { scroll-behavior: smooth; }
+        body { @apply bg-paper font-sans text-ink antialiased; }
+        a { @apply transition-colors duration-200; }
+      }
+      @layer components {
+        .shell { @apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16; }
+        .eyebrow { @apply text-[10px] font-semibold uppercase tracking-label text-copper; }
+        .section-title { @apply text-3xl font-bold leading-[.98] tracking-[-.055em] md:text-5xl; }
+        .button-primary { @apply inline-flex items-center gap-4 bg-copper px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514] focus:outline-none focus:ring-2 focus:ring-copper focus:ring-offset-2; }
+        .button-secondary { @apply inline-flex items-center gap-4 border border-current px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] hover:bg-paper hover:text-ink focus:outline-none focus:ring-2 focus:ring-copper focus:ring-offset-2 focus:ring-offset-ink; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="border-b border-ink/20 bg-paper">
+      <div class="shell flex h-20 items-center justify-between gap-5">
+        <a href="/" aria-label="ABCD Ingénierie — accueil" class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center border-2 border-ink text-lg font-bold tracking-[-.1em]">A</span>
+          <span>
+            <span class="block text-base font-bold leading-none tracking-[-.07em]">ABCD</span>
+            <span class="mt-1 block text-[8px] font-semibold uppercase tracking-[.14em] text-steel">Ingénierie</span>
+          </span>
+        </a>
+        <nav class="hidden items-center gap-7 text-[10px] font-semibold uppercase tracking-[.12em] lg:flex" aria-label="Navigation principale">
+          <a class="text-copper" href="/">Accueil</a>
+          <a class="hover:text-copper" href="/prestations">Prestations</a>
+          <a class="hover:text-copper" href="/a-propos">À propos</a>
+        </nav>
+        <a class="button-primary shrink-0" href="/contact">Parler de votre projet <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="overflow-hidden bg-ink text-paper">
+        <div class="shell grid min-h-[650px] gap-12 py-16 md:py-24 lg:grid-cols-12 lg:items-end lg:py-28">
+          <div class="lg:col-span-8">
+            <p class="eyebrow mb-6">Bureau d'études structure · Bois &amp; métal</p>
+            <h1 class="max-w-4xl text-5xl font-bold leading-[.93] tracking-[-.065em] md:text-7xl xl:text-8xl">Des structures bois et métal pensées pour <span class="text-copper">faire avancer</span> votre projet.</h1>
+            <p class="mt-8 max-w-2xl text-base leading-7 text-paper/75 md:text-lg md:leading-8">ABCD Ingénierie accompagne vos projets de construction, rénovation, extension et transformation, de l'étude de conception au diagnostic de l'existant.</p>
+            <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+              <a class="button-primary" href="/contact">Présenter mon projet <span aria-hidden="true">↗</span></a>
+              <a class="button-secondary" href="/prestations">Découvrir nos prestations <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <div class="relative min-h-52 border-l border-paper/25 pl-5 lg:col-span-3 lg:col-start-10">
+            <p class="text-[10px] font-semibold uppercase tracking-label text-paper/55">Structure &amp; matière</p>
+            <div class="absolute bottom-0 right-0 h-44 w-full max-w-64 border border-paper/25">
+              <span class="absolute bottom-0 left-0 h-[56%] w-[58%] bg-oak"></span>
+              <span class="absolute bottom-[56%] left-[58%] h-[44%] w-[42%] bg-copper"></span>
+              <span class="absolute left-[58%] top-[56%] h-px w-[42%] bg-paper"></span>
+              <span class="absolute bottom-0 left-[58%] h-[56%] w-px bg-paper"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell grid gap-10 py-20 md:grid-cols-12 md:py-28">
+        <div class="md:col-span-4"><p class="eyebrow">01 · Notre rôle</p></div>
+        <div class="md:col-span-7 md:col-start-6">
+          <h2 class="section-title">Une expertise structure claire, à chaque étape du projet.</h2>
+          <p class="mt-7 max-w-2xl text-base leading-7 text-steel md:text-lg md:leading-8">Notre métier consiste à analyser, concevoir et dimensionner les structures bois et métal. Nous produisons des études compréhensibles et adaptées aux contraintes techniques, réglementaires et opérationnelles de votre projet.</p>
+          <ul class="mt-10 grid gap-x-8 gap-y-5 border-t border-ink/20 pt-6 sm:grid-cols-2">
+            <li class="border-l-2 border-copper pl-4 text-sm leading-6">Expertise ciblée : <strong>bois et métal</strong>.</li>
+            <li class="border-l-2 border-copper pl-4 text-sm leading-6">Intervention sur le neuf comme sur l'existant.</li>
+            <li class="border-l-2 border-copper pl-4 text-sm leading-6">Échanges clairs avec tous les intervenants.</li>
+            <li class="border-l-2 border-copper pl-4 text-sm leading-6">Livrables ajustés à la phase et au besoin.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="border-y border-ink/20 bg-[#eeece7] py-20 md:py-28">
+        <div class="shell">
+          <div class="grid gap-8 md:grid-cols-12">
+            <div class="md:col-span-4"><p class="eyebrow">02 · Vos besoins</p></div>
+            <div class="md:col-span-7 md:col-start-6"><h2 class="section-title">De quel accompagnement avez-vous besoin ?</h2><p class="mt-5 max-w-2xl text-base leading-7 text-steel">Identifiez la situation qui correspond à votre projet ; nous vous aidons à préciser le périmètre de l'étude.</p></div>
+          </div>
+          <div class="mt-12 grid gap-4 md:grid-cols-2">
+            <a href="/prestations#conception" class="group border border-ink/20 bg-paper p-6 hover:border-ink md:p-8"><span class="eyebrow">01 · Conception</span><h3 class="mt-7 text-2xl font-bold leading-none tracking-[-.05em]">Un projet à imaginer, valider ou dimensionner.</h3><p class="mt-5 text-sm leading-6 text-steel">Définir une solution structurelle fiable dès les premières phases.</p><span class="mt-8 inline-block text-[10px] font-semibold uppercase tracking-[.12em] group-hover:text-copper">Découvrir la conception&nbsp; →</span></a>
+            <a href="/prestations#execution" class="group border border-ink/20 bg-paper p-6 hover:border-ink md:p-8"><span class="eyebrow">02 · Exécution</span><h3 class="mt-7 text-2xl font-bold leading-none tracking-[-.05em]">Un projet défini qui doit être réalisé.</h3><p class="mt-5 text-sm leading-6 text-steel">Disposer des études et documents utiles à la bonne exécution des travaux.</p><span class="mt-8 inline-block text-[10px] font-semibold uppercase tracking-[.12em] group-hover:text-copper">Découvrir l'exécution&nbsp; →</span></a>
+            <a href="/prestations#diagnostic-avec-recommandations" class="group border border-ink/20 bg-paper p-6 hover:border-ink md:p-8"><span class="eyebrow">03 · Diagnostic</span><h3 class="mt-7 text-2xl font-bold leading-none tracking-[-.05em]">Un désordre, une fragilité ou une contrainte sur l'existant.</h3><p class="mt-5 text-sm leading-6 text-steel">Comprendre la situation et obtenir des préconisations d'intervention.</p><span class="mt-8 inline-block text-[10px] font-semibold uppercase tracking-[.12em] group-hover:text-copper">Découvrir le diagnostic&nbsp; →</span></a>
+            <a href="/prestations#diagnostic-visuel" class="group border border-ink/20 bg-paper p-6 hover:border-ink md:p-8"><span class="eyebrow">04 · Constat visuel</span><h3 class="mt-7 text-2xl font-bold leading-none tracking-[-.05em]">Un état apparent à observer et documenter.</h3><p class="mt-5 text-sm leading-6 text-steel">Bénéficier d'une analyse visuelle, sans préconisation de travaux.</p><span class="mt-8 inline-block text-[10px] font-semibold uppercase tracking-[.12em] group-hover:text-copper">Découvrir le constat visuel&nbsp; →</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell grid gap-10 py-20 md:grid-cols-12 md:py-28">
+        <div class="md:col-span-4"><p class="eyebrow">03 · Notre méthode</p></div>
+        <div class="md:col-span-7 md:col-start-6"><h2 class="section-title">Un accompagnement rigoureux, sans complexifier les échanges.</h2></div>
+        <ol class="grid gap-px bg-ink/20 md:col-span-12 md:grid-cols-4">
+          <li class="bg-paper p-6"><span class="text-4xl font-bold tracking-[-.07em] text-copper">01</span><h3 class="mt-12 text-xl font-bold tracking-[-.04em]">Comprendre</h3><p class="mt-3 text-sm leading-6 text-steel">Écoute du besoin, du contexte et des contraintes.</p></li>
+          <li class="bg-paper p-6"><span class="text-4xl font-bold tracking-[-.07em] text-copper">02</span><h3 class="mt-12 text-xl font-bold tracking-[-.04em]">Analyser</h3><p class="mt-3 text-sm leading-6 text-steel">Collecte des informations utiles et étude de la structure.</p></li>
+          <li class="bg-paper p-6"><span class="text-4xl font-bold tracking-[-.07em] text-copper">03</span><h3 class="mt-12 text-xl font-bold tracking-[-.04em]">Proposer</h3><p class="mt-3 text-sm leading-6 text-steel">Remise d'études, de constats ou de documents adaptés à la mission.</p></li>
+          <li class="bg-paper p-6"><span class="text-4xl font-bold tracking-[-.07em] text-copper">04</span><h3 class="mt-12 text-xl font-bold tracking-[-.04em]">Échanger</h3><p class="mt-3 text-sm leading-6 text-steel">Explication des résultats et coordination avec les intervenants concernés.</p></li>
+        </ol>
+      </section>
+
+      <section class="border-y border-ink/20 bg-ink py-20 text-paper md:py-28">
+        <div class="shell grid gap-10 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7"><p class="eyebrow">04 · Références</p><h2 class="mt-5 text-3xl font-bold leading-[.98] tracking-[-.055em] md:text-5xl">Des projets concrets, des réponses adaptées.</h2></div>
+          <p class="border-l border-paper/25 pl-5 text-base leading-7 text-paper/70 md:col-span-4 md:col-start-9">Les premières références ABCD Ingénierie seront bientôt présentées ici.</p>
+        </div>
+      </section>
+
+      <section class="bg-oak py-20 md:py-28">
+        <div class="shell grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7"><p class="text-[10px] font-semibold uppercase tracking-label text-ink/70">Parlons de votre projet</p><h2 class="mt-5 text-4xl font-bold leading-[.96] tracking-[-.06em] md:text-6xl">Une demande claire commence par quelques mots.</h2></div>
+          <div class="md:col-span-4 md:col-start-9"><p class="text-sm leading-7 text-ink/80">Décrivez votre besoin, l'état d'avancement du projet et les documents dont vous disposez. Nous vous orienterons vers la mission adaptée.</p><a class="mt-8 inline-flex items-center gap-4 bg-ink px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] text-paper hover:bg-[#3c4044]" href="/contact">Accéder au formulaire <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-ink py-12 text-paper">
+      <div class="shell grid gap-10 md:grid-cols-12">
+        <div class="md:col-span-5"><p class="text-2xl font-bold tracking-[-.07em]">ABCD <span class="text-copper">Ingénierie</span></p><p class="mt-3 text-[10px] font-semibold uppercase tracking-label text-paper/55">Bureau d'études structure</p></div>
+        <div class="grid gap-2 text-sm text-paper/70 sm:grid-cols-2 md:col-span-4"><a class="hover:text-copper" href="/prestations">Prestations</a><a class="hover:text-copper" href="/a-propos">À propos</a><a class="hover:text-copper" href="/contact">Contact</a><a class="hover:text-copper" href="/mentions-legales">Mentions légales</a><a class="hover:text-copper" href="/politique-de-confidentialite">Politique de confidentialité</a></div>
+        <div class="border-l border-paper/25 pl-5 text-xs leading-6 text-paper/55 md:col-span-3"><p>15 rue Evain<br />49000 Angers</p><p class="mt-4">Établissement secondaire<br />Saint-Gildas-de-Rhuys</p></div>
+      </div>
+      <div class="shell mt-10 border-t border-paper/15 pt-5 text-[10px] font-medium uppercase tracking-[.12em] text-paper/45">ABCD Ingénierie, SAS · SIREN 000 000 000 · NAF 71.12B</div>
+    </footer>
+  </body>
+</html>
