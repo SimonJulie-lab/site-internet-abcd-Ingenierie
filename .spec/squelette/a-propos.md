@@ -4,7 +4,7 @@
 
 Présenter l'identité et la manière de travailler d'ABCD Ingénierie afin d'installer une relation de confiance, sans revendiquer d'éléments non confirmés.
 
-## Hero
+## Hero 
 
 ### La rigueur d'un bureau d'études, la clarté d'un partenaire de projet.
 
