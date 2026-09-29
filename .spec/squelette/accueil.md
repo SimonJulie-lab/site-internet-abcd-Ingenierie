@@ -1,84 +1,85 @@
 # Accueil — `/`
 
-## Objectif
-
-Faire comprendre immédiatement qu'ABCD Ingénierie est un bureau d'études structure expert bois et métal, orienter le visiteur vers son besoin et l'amener au formulaire de contact.
-
 ## Hero
 
-### Propositions de titre — cible particuliers
+### La rigueur d’un bureau d’études, la proximité d’un partenaire de projet.
 
-1. **Vous transformez votre maison ? Donnez à votre projet une structure fiable.**
-2. **Extension, rénovation, ouverture : sécurisez votre projet dès les premières idées.**
-3. **Faites évoluer votre maison en toute confiance, avec une structure pensée pour durer.**
+Bureau d’études structure spécialisé en bois et en renforcement métal, ABCD Ingénierie accompagne les professionnels et les particuliers dans leurs projets de construction, de rénovation et de transformation, ainsi que dans l’analyse des structures existantes.
 
-> Titre à sélectionner avant intégration : la proposition 2 est la plus directe et la plus explicite pour un particulier ayant un projet concret.
+**Comprendre. Analyser. Concevoir. Accompagner.**
 
-ABCD Ingénierie accompagne vos projets de construction, rénovation, extension et transformation, de l'étude de conception au diagnostic de l'existant.
+> **[PLACEHOLDER PHOTO — ACCUEIL]** — Photo de chantier montrant une structure bois ou un renforcement métallique. Prévoir un texte alternatif descriptif.
 
-- CTA principal : **Présenter mon projet** → `/contact`
-- CTA secondaire : **Découvrir nos prestations** → `/prestations`
+## Vous êtes
 
-## Une expertise structure claire, à chaque étape du projet
+### Professionnels de la construction
 
-Notre métier consiste à analyser, concevoir et dimensionner les structures bois et métal. Nous produisons des études compréhensibles et adaptées aux contraintes techniques, réglementaires et opérationnelles de votre projet.
+- Architectes & maîtres d’œuvre → `/architectes-maitres-oeuvre`
+- Entreprises → `/entreprises`
+- Syndic → `/syndics`
+- Acteur judiciaire → `/judiciaire`
+- Secteur public → `/secteur-public`
 
-- Expertise ciblée : bois et métal.
-- Intervention sur le neuf comme sur l'existant.
-- Échanges clairs avec maîtres d'ouvrage, architectes, maîtres d'œuvre et entreprises.
-- Livrables ajustés à la phase et au besoin.
+## Vous êtes un particulier
 
-## De quel accompagnement avez-vous besoin ?
+Diagnostic · Projet de construction
 
-Identifiez la situation qui correspond à votre projet ; nous vous aidons à préciser le périmètre de l'étude.
+**Lien :** `Présenter votre projet` → `/particuliers`
 
-### Conception
+## Un bureau d’études implanté dans l’Ouest
 
-**Besoin :** J'ai un projet à imaginer, valider ou dimensionner.
+### Une présence à Angers et dans la région de Vannes et la presqu’île de Rhuys
 
-Définir une solution structurelle fiable dès les premières phases.
+ABCD Ingénierie est implantée à Angers et également présente dans la région de Vannes et la presqu’île de Rhuys. Son secteur d’intervention couvre principalement le Maine-et-Loire (49), la Mayenne (53), la Sarthe (72), la Loire-Atlantique (44) et le Morbihan (56).
 
-**Lien :** `Découvrir la conception` → `/prestations#conception`
+Angers constitue l’implantation principale. Selon la nature du projet et les besoins de la mission, ABCD Ingénierie peut également étudier des projets situés au-delà de ce secteur.
 
-### Exécution
+## Une manière de travailler simple et directe
 
-**Besoin :** Mon projet est défini et doit être réalisé.
+### Écouter. Comprendre. Analyser. Échanger. Accompagner.
 
-Disposer des études et documents utiles à la bonne exécution des travaux.
+Une étude structure commence par une bonne compréhension du projet. Nous prenons le temps d’échanger sur votre besoin, d’identifier les contraintes et de comprendre les attentes des différents intervenants.
 
-**Lien :** `Découvrir l'exécution` → `/prestations#execution`
+### Écouter
 
-### Diagnostic structurel avec recommandations
+Comprendre votre projet, vos objectifs et vos contraintes.
 
-**Besoin :** Je constate un désordre, une fragilité ou une contrainte sur un ouvrage existant.
+### Analyser
 
-Comprendre la situation et obtenir des préconisations d'intervention.
+Étudier les données disponibles et identifier les hypothèses nécessaires.
 
-**Lien :** `Découvrir le diagnostic avec recommandations` → `/prestations#diagnostic-avec-recommandations`
+### Expliquer
 
-### Diagnostic structurel sans recommandations — constat visuel
+Rendre les enjeux structurels compréhensibles, sans jargon inutile.
 
-**Besoin :** J'ai besoin d'un constat sur l'état apparent d'une structure existante.
+### Échanger
 
-Bénéficier d'une analyse visuelle, sans préconisation de travaux.
+Travailler avec les différents acteurs du projet pour confronter les choix techniques aux réalités du terrain.
 
-**Lien :** `Découvrir le constat visuel` → `/prestations#diagnostic-visuel`
+### Accompagner
 
-## Un accompagnement rigoureux, sans complexifier les échanges
+Rester un interlocuteur disponible pour les questions qui relèvent de la mission et aider le projet à avancer avec des éléments clairs.
 
-1. **Comprendre** — écoute du besoin, du contexte et des contraintes.
-2. **Analyser** — collecte des informations utiles et étude de la structure.
-3. **Proposer** — remise d'études, de constats ou de documents adaptés à la mission.
-4. **Échanger** — explication des résultats et coordination avec les intervenants concernés.
+## Une étude structure, ce n’est pas seulement un calcul
 
-## Des projets concrets, des réponses adaptées
+### C’est un outil pour prendre les bonnes décisions.
 
-Les premières références ABCD Ingénierie seront bientôt présentées ici.
+Une étude utile doit permettre de comprendre :
 
-> À terme, cette section accueillera des cartes projet : contexte, type de mission, matériaux, enjeux et solution apportée. Ne pas inventer de références avant leur disponibilité.
+- ce qui est constaté ;
+- ce qui est calculé ;
+- les hypothèses retenues ;
+- les éventuelles limites de l’analyse ;
+- les solutions envisageables ;
+- les points nécessitant une attention particulière.
 
-## Parlons de votre projet
+Nous cherchons ainsi à produire des études techniquement rigoureuses, lisibles et adaptées aux besoins du projet.
 
-Décrivez votre besoin, l'état d'avancement du projet et les documents dont vous disposez. Nous vous orienterons vers la mission adaptée.
+## Vous avez une question structure ? Parlons-en.
 
-**CTA :** `Accéder au formulaire de contact` → `/contact`
+Vous êtes professionnel et avez besoin d’un accompagnement pour un projet ? Vous êtes particulier et souhaitez comprendre une situation ou étudier la faisabilité d’un projet ?
+
+Un premier échange permet de comprendre votre besoin et de déterminer les éléments nécessaires pour envisager la suite.
+
+- **CTA principal :** `Parler de votre projet` → `/contact`
+- **CTA secondaire :** `Découvrir ABCD Ingénierie` → `/a-propos`

@@ -4,6 +4,8 @@
 
 Prolonger le rôle pédagogique du site : expliquer simplement les enjeux de structure, valoriser les matériaux bois et métal et aider les visiteurs à mieux préparer leur projet.
 
+> **[PLACEHOLDER PHOTO — INDEX DU BLOG]** — Visuel éditorial lié à la structure ou aux matériaux bois et métal, avec texte alternatif descriptif.
+
 ## Catégories proposées
 
 - Comprendre la structure
@@ -13,10 +15,8 @@ Prolonger le rôle pédagogique du site : expliquer simplement les enjeux de str
 - Diagnostics et bonnes pratiques
 - Vie des projets
 
-## Gabarit d'article — `/blog/[slug]`
+## Liste des articles
 
-1. **Titre** orienté question ou bénéfice.
-2. **Introduction** : situation rencontrée et promesse de lecture.
-3. **Développement** structuré, en langage accessible.
-4. **Encadré** : points de vigilance / ce qu'il faut retenir.
-5. **CTA** : `Vous avez un projet similaire ? Présentez-le-nous.` → `/contact`
+> **[PLACEHOLDER CARTE D’ARTICLE]** — Pour chaque article, prévoir une image autorisée, un titre, un court résumé, une date de publication et un lien vers l'article.
+
+Créer les articles à partir du modèle `post-temoin.md`.
