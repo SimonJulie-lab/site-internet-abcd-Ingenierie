@@ -9,7 +9,7 @@ Accueil /
 ├── Particulier /particuliers
 │   ├── Diagnostic
 │   └── Projet de construction
-├── Syndics /syndics
+├── Syndic de Copropriété et Agences immobilières /syndics
 ├── Judiciaire /judiciaire
 ├── Secteur public /secteur-public
 ├── Nos expertises /nos-expertises

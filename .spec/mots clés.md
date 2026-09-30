@@ -1,0 +1,120 @@
+Mots clés vulgarisés, tout public:
+- plancher qui s’affaisse
+- plancher qui bouge ou qui vibre
+- poutre qui fléchit
+- solives abîmées ou fragiles
+- plafond qui se fissure
+- fissures après travaux
+- charpente qui se déforme
+- toit qui s’affaisse
+- bois pourri dans une maison
+- poutre attaquée par des insectes
+- plancher dangereux dans une maison ancienne
+- maison qui craque, plancher qui craque
+- vérifier si un plancher peut supporter une salle de bains
+- peut-on poser une cloison sur un plancher bois
+- renforcer un plancher avant travaux
+- vérifier une poutre avant d’ouvrir un mur
+- savoir si un mur est porteur
+- vérifier la solidité d’une maison ancienne
+- vérifier une charpente avant achat
+- maison ancienne : vérifier l’état des poutres
+- aménager des combles : vérifier la charpente
+- installer un poêle ou un équipement lourd sur un plancher
+- faire une mezzanine : vérifier la structure
+- surélever une maison : vérifier les fondations et les planchers
+- qui peut vérifier la solidité d’un plancher
+- quel professionnel inspecte une poutre en bois
+- spécialiste des planchers bois anciens
+- expert pour une charpente qui s’affaisse
+- ingénieur pour vérifier une structure de maison
+- avis professionnel avant rénovation d’une maison ancienne
+- entreprise pour inspecter des poutres cachées dans les murs
+- vérifier si une maison peut supporter des travaux
+- rapport sur l’état des poutres et des planchers
+- expert indépendant pour fissures et affaissement
+- Pour les recherches locales, associer ces expressions à une ville ou un département :
+- expert plancher bois près de moi
+- spécialiste charpente maison ancienne [ville]
+- vérifier la solidité d’un plancher [ville]
+- expert poutre bois [département]
+- ingénieur structure maison ancienne [ville]
+- avis avant rénovation [ville]
+
+
+
+Mots clés 
+- Diagnostic structurel / diagnostic structure bâtiment existant
+- Reconnaissance structurelle
+- Reconnaissance du principe constructif
+- Identification des éléments porteurs
+- Relevé de structure et relevé de charpente
+- Bâti ancien, bâtiment existant, réhabilitation
+- Sondages destructifs légers et non destructifs
+- Sondage mécanique des bois
+- Rapport de diagnostic et préconisations
+- Diagnostic plancher bois existant
+- Plancher bois traditionnel / plancher à la française
+- Solivage bois, solives, poutres
+- Section des solives et entraxe
+- Sens de portée
+- État des appuis et abouts de solives
+- Ancrage des poutres dans la maçonnerie
+- Flèche, déformation, affaissement
+- Capacité portante résiduelle
+- Surcharge admissible / ajout de charges
+- Vérification avant réhabilitation ou changement d’usage
+- Diagnostic charpente bois
+- Charpente traditionnelle / fermettes industrielles
+- Pannes, chevrons, arbalétriers, fermes, faîtière
+- Assemblages bois et fixations métalliques
+- Défaut d’assemblage ou de fixation
+- Déformation, affaissement, flèche
+- Déversement, flambement, contreventement
+- Vérification des sections et des appuis
+- Calcul de structure bois / Eurocode 5
+- Bois dégradé, pourriture, humidité
+- Mérule et champignons lignivores
+- Insectes xylophages / insectes à larves xylophages
+- Capricorne, vrillette, hespérophane
+- Perte de section résistante
+- Sondage à l’aiguille
+- Mesure d’humidité du bois
+- About de poutre ou de solive dégradé
+- Attaque biologique aux points d’ancrage
+- Expertise charpente et couverture
+- Diagnostic de malfaçons
+- Non-respect des plans
+- Défaut de dimensionnement
+- Défaut de mise en œuvre
+- Fissures, déformation, affaissement
+- Infiltrations et désordres liés à l’humidité
+- Analyse des causes et rapport d’expertise
+
+
+- diagnostic structurel plancher bois existant
+- diagnostic solivage bois et capacité portante
+- expertise charpente bois ancienne désordres
+- sondage des abouts de solives dans la maçonnerie
+- diagnostic ancrage (appui) poutre bois mur
+- diagnostic bois mérule insectes xylophages charpente
+- vérification structure bois avant réhabilitation
+- calcul Eurocode 5 plancher bois existant
+- rapport diagnostic structure bois avec préconisations de renforcement
+- expertise malfaçons charpente et couverture
+- Analyse documentaire : plans de structure, carnet d’entretien, rapports antérieurs, documents d’ouvrage exécutés.
+- Inspection visuelle exhaustive sur site
+- Descente de charges
+- Examen des éléments porteurs et de la structure apparente
+- Diagnostic des désordres techniques
+- Sondages sur site et vérification de la structure existante
+- Modélisation et note de calcul selon les Eurocodes
+- Rapport détaillé, préconisations et hiérarchisation des travaux
+- proposition de travaux de confortement (exemples et calculs)
+- Sécurisation des occupants et pérennité du bâtiment
+- diagnostic structurel bâtiment existant inspection visuelle
+- analyse descente de charges bâtiment ancien
+- sondages sur site vérification structure existante
+- diagnostic structurel avec note de calcul Eurocodes
+- diagnostic désordres structurels et hiérarchisation des travaux
+- état des lieux technique planchers charpente bâtiment

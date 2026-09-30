@@ -1,5 +1,6 @@
 # Accueil — `/`
 
+
 ## Hero
 
 ### La rigueur d’un bureau d’études, la proximité d’un partenaire de projet.
@@ -16,7 +17,7 @@ Bureau d’études structure spécialisé en bois et en renforcement métal, ABC
 
 - Architectes & maîtres d’œuvre → `/architectes-maitres-oeuvre`
 - Entreprises → `/entreprises`
-- Syndic → `/syndics`
+- Syndic de Copropriété et Agences immobilières → `/syndics`
 - Acteur judiciaire → `/judiciaire`
 - Secteur public → `/secteur-public`
 
@@ -54,7 +55,7 @@ Rendre les enjeux structurels compréhensibles, sans jargon inutile.
 
 ### Échanger
 
-Travailler avec les différents acteurs du projet pour confronter les choix techniques aux réalités du terrain.
+Travailler avec les différents acteurs du projet pour confronter les choix techniques aux réalités du terrain. Echang
 
 ### Accompagner
 
