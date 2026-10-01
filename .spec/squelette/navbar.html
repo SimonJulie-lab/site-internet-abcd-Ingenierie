@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar — ABCD Ingénierie</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{ink:'#202326',steel:'#67686A',oak:'#C99358',copper:'#C96B1B',paper:'#F8F7F4'},fontFamily:{sans:['Montserrat','Arial','sans-serif']},letterSpacing:{label:'.16em'}}}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer base { html { scroll-behavior:smooth } body { @apply bg-paper font-sans text-ink antialiased } a { @apply transition-colors duration-200 } }
+    @layer components { .shell { @apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16 } .button-primary { @apply inline-flex items-center gap-2 bg-copper px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514] } }
+  </style>
+</head>
+<body>
+
+  <header class="border-b border-ink/20 bg-paper">
+    <div class="shell flex min-h-20 flex-wrap items-center justify-between gap-4 py-3">
+      <a href="/index.html" aria-label="ABCD Ingénierie — accueil" class="flex items-center gap-3">
+        <img alt="ABCD Ingénierie" class="block h-14 w-auto" src="https://cdn.stedzstudio.com/abcd-logo.png"></a>
+      <nav class="hidden flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[.12em] md:flex" aria-label="Navigation principale">
+        <a class="hover:text-copper" href="/index.html">Accueil</a>
+        <div class="group relative">
+          <button class="flex items-center gap-1 hover:text-copper" aria-expanded="false" aria-haspopup="true">QUI&nbsp;VOUS&nbsp;ÊTES<br><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="absolute left-0 top-full z-50 hidden w-[28rem] border border-ink/10 bg-paper p-5 shadow-lg group-hover:block group-focus-within:block">
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+              <a class="block py-1 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architectes &amp; maîtres d’œuvre</a>
+              <a class="block py-1 hover:text-copper" href="/entreprises.html">Entreprises</a>
+              <a class="block py-1 hover:text-copper" href="/particuliers.html">Particuliers</a>
+              <a class="block py-1 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+              <a class="block py-1 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+              <a class="block py-1 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+            </div>
+          </div>
+        </div>
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+        <a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+        <a class="hover:text-copper" href="/a-propos.html">À propos</a>
+      </nav>
+      <a class="button-primary hidden shrink-0 md:inline-flex" href="/contact.html">Parler de votre projet <span aria-hidden="true">↗</span></a>
+      <button id="menu-toggle" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-ink/10 px-5 pb-5 pt-3 text-[10px] font-semibold uppercase tracking-[.12em] md:hidden" aria-label="Navigation mobile">
+      <a class="block py-2 hover:text-copper" href="/index.html">Accueil</a>
+      <span class="block py-2 text-steel">Qui vous êtes</span>
+      <a class="block py-1 pl-4 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architectes &amp; maîtres d’œuvre</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/entreprises.html">Entreprises</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/particuliers.html">Particuliers</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+      <a class="block py-2 hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+      <a class="block py-2 hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+      <a class="block py-2 hover:text-copper" href="/a-propos.html">À propos</a>
+      <a class="button-primary mt-3 inline-flex w-full justify-center" href="/contact.html">Parler de votre projet <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('hidden');
+    });
+  </script>
+
+
+
+</body></html>
