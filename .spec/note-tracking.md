@@ -2,13 +2,13 @@
 
 ## Code installé
 
-Le code de suivi demandé est chargé dans le `<head>` de `site/index.html` :
+Le code de suivi est chargé dans le `<head>` de chaque page du site, juste après la balise `<title>` :
 
 ```html
 <script defer src="https://cloud.umami.is/script.js" data-website-id="fee80ad3-228d-4069-9e42-6f5cad8a54b8"></script>
 ```
 
-L'identifiant de site Umami est `fee80ad3-228d-4069-9e42-6f5cad8a54b8`. Le dépôt ne contient actuellement qu'une page HTML du site (`site/index.html`), donc ce script couvre la page publiée actuelle. Si d'autres pages HTML autonomes sont ajoutées, le script devra être inclus dans leur `<head>` ou dans leur gabarit commun.
+L'identifiant de site Umami est `fee80ad3-228d-4069-9e42-6f5cad8a54b8`. La balise est reprise à l'identique dans les 18 pages HTML de `site/`, y compris `404.html` et les pages `blog/` et `realisations/`. Toute page ajoutée par la suite doit reprendre cette balise dans son `<head>`, ou hériter d'un gabarit commun qui la porte.
 
 ## Mesures annoncées par Umami
 
