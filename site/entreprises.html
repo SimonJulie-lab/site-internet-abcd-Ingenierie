@@ -1,25 +1,294 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ABCD Ingénierie étudie les structures bois et métal pour des opérations neuves ou sur l'existant. Les besoins de vérification, de dimensionnement et les do" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Accompagnement des entreprises en structure bois et métal">
   <title>Entreprises — ABCD Ingénierie</title>
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="fee80ad3-228d-4069-9e42-6f5cad8a54b8"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{ink:'#202326',steel:'#67686A',oak:'#C99358',copper:'#C96B1B',paper:'#F8F7F4'},fontFamily:{sans:['Montserrat','Arial','sans-serif']},letterSpacing:{label:'.16em'}}}}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style type="text/tailwindcss">@layer base{html{scroll-behavior:smooth}body{@apply bg-paper font-sans text-ink antialiased}a{@apply transition-colors duration-200}}@layer components{.shell{@apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16}.eyebrow{@apply text-[10px] font-semibold uppercase tracking-label text-copper}.button-primary{@apply inline-flex items-center gap-4 bg-copper px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514]}}</style>
+  <style type="text/tailwindcss">
+    @layer base {
+      html { scroll-behavior: smooth }
+      body { @apply bg-paper font-sans text-ink antialiased }
+      a { @apply transition-colors duration-200 }
+    }
+    @layer components {
+      .shell { @apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16 }
+      .eyebrow { @apply text-[10px] font-semibold uppercase tracking-label text-copper }
+      .button-primary { @apply inline-flex items-center gap-2 bg-copper px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514] }
+      .button-secondary { @apply inline-flex items-center gap-2 border border-ink px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-ink hover:border-copper hover:text-copper }
+      .panel { @apply border border-ink/20 bg-white }
+      /* Lecture : largeur de ligne confortable et hierarchie douce */
+      .lead { @apply max-w-[58ch] text-lg leading-8 text-steel md:text-xl md:leading-9 }
+      .flow { @apply max-w-[68ch] space-y-5 text-base leading-7 text-steel }
+      .flow > p { @apply max-w-[68ch] }
+      .measure { @apply max-w-[68ch] }
+      /* Trame editoriale : reperes a gauche, contenu a droite */
+      .rail { @apply grid gap-6 md:grid-cols-12 md:gap-10 }
+      .rail-head { @apply md:col-span-4 }
+      .rail-body { @apply md:col-span-7 md:col-start-6 }
+      /* Blocs de mise en avant */
+      .callout { @apply border-l-4 border-copper bg-white p-5 md:p-6 }
+      .note { @apply border-l-2 border-ink/25 pl-4 text-sm leading-6 text-steel }
+      .grid-cells { @apply grid gap-px border border-ink/20 bg-ink/20 }
+      .grid-cells > * { @apply bg-paper p-5 md:p-6 }
+      .spec { @apply border-t border-ink/15 pt-5 }
+      .spec dt { @apply text-[10px] font-semibold uppercase tracking-[.12em] text-steel }
+      .spec dd { @apply mt-2 text-base leading-7 text-ink }
+      /* Listes guidees */
+      .checklist { @apply space-y-3 }
+      .checklist-cols { @apply grid gap-3 sm:grid-cols-2 sm:gap-x-10 }
+      .checklist > li, .checklist-cols > li { @apply relative pl-6 text-base leading-7 text-steel }
+      .checklist > li::before, .checklist-cols > li::before { content: ""; position: absolute; left: 0; top: .62em; width: .45rem; height: .45rem; background: #C96B1B }
+      .checklist.is-ink > li::before, .checklist-cols.is-ink > li::before { background: #202326 }
+      .checklist.is-paper > li { @apply text-paper/75 }
+      .checklist.is-paper > li::before { background: #C96B1B }
+      /* Sommaire interne */
+      .toc { @apply grid gap-px border border-ink/20 bg-ink/20 sm:grid-cols-2 lg:grid-cols-3 }
+      .toc > * { @apply flex items-center justify-between gap-4 bg-paper px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] text-ink hover:text-copper }
+      /* Questions frequentes */
+      .faq { @apply border-t border-ink/20 }
+      .faq details { @apply border-b border-ink/20 }
+      .faq summary { @apply flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-bold leading-snug tracking-[-.03em] text-ink }
+      .faq summary::-webkit-details-marker { display: none }
+      .faq summary::after { content: "+"; margin-left: 1.5rem; flex: none; font-size: 1.25rem; font-weight: 400; line-height: 1.1; color: #C96B1B }
+      .faq details[open] summary::after { content: "–" }
+      .faq details[open] summary { color: #C96B1B }
+      .faq .answer { @apply max-w-[68ch] pb-6 text-base leading-7 text-steel }
+      /* Etapes numerotees */
+      .step { @apply bg-paper p-5 md:p-6 }
+      .step-num { @apply block text-[10px] font-semibold uppercase tracking-label text-copper }
+      /* Formulaire */
+      .field-label { @apply block text-[10px] font-semibold uppercase tracking-[.12em] text-ink }
+      .field-input { @apply mt-2 block w-full border border-ink/20 bg-white px-4 py-3 text-base text-ink placeholder:text-steel/60 focus:border-copper focus:outline-none }
+    }
+  </style>
 </head>
 <body>
-  <abcd-navbar></abcd-navbar>
+
+  <header class="border-b border-ink/20 bg-paper">
+    <div class="shell flex min-h-20 flex-wrap items-center justify-between gap-4 py-3">
+      <a href="/index.html" aria-label="ABCD Ingénierie — accueil" class="flex items-center gap-3">
+        <img alt="ABCD Ingénierie" class="block h-14 w-auto" src="https://cdn.stedzstudio.com/abcd-logo.png"></a>
+      <nav class="hidden flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[.12em] md:flex" aria-label="Navigation principale">
+        <a class="hover:text-copper" href="/index.html">Accueil</a>
+        <div class="group relative">
+          <button class="flex items-center gap-1 hover:text-copper" aria-expanded="false" aria-haspopup="true">QUI&nbsp;VOUS&nbsp;ÊTES<br><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="absolute left-0 top-full z-50 hidden w-[28rem] border border-ink/10 bg-paper p-5 group-hover:block group-focus-within:block">
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+              <a class="block py-1 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architectes &amp; maîtres d’œuvre</a>
+              <a class="block py-1 hover:text-copper" href="/entreprises.html">Entreprises</a>
+              <a class="block py-1 hover:text-copper" href="/particuliers.html">Particuliers</a>
+              <a class="block py-1 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+              <a class="block py-1 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+              <a class="block py-1 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+            </div>
+          </div>
+        </div>
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+        <a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+        <a class="hover:text-copper" href="/a-propos.html">À propos</a>
+      </nav>
+      <a class="button-primary hidden shrink-0 md:inline-flex" href="/contact.html">Parler de votre projet <span aria-hidden="true">↗</span></a>
+      <button id="menu-toggle" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-ink/10 px-5 pb-5 pt-3 text-[10px] font-semibold uppercase tracking-[.12em] md:hidden" aria-label="Navigation mobile">
+      <a class="block py-2 hover:text-copper" href="/index.html">Accueil</a>
+      <span class="block py-2 text-steel">Qui vous êtes</span>
+      <a class="block py-1 pl-4 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architectes &amp; maîtres d’œuvre</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/entreprises.html">Entreprises</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/particuliers.html">Particuliers</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+      <a class="block py-2 hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+      <a class="block py-2 hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+      <a class="block py-2 hover:text-copper" href="/a-propos.html">À propos</a>
+      <a class="button-primary mt-3 inline-flex w-full justify-center" href="/contact.html">Parler de votre projet <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
   <main>
-    <section class="bg-ink py-16 text-paper md:py-24"><div class="shell"><p class="eyebrow">ABCD Ingénierie · Entreprises</p><h1 class="mt-5 max-w-5xl text-4xl font-bold leading-[.98] tracking-[-.06em] md:text-6xl">Entreprises</h1><p class="mt-6 max-w-3xl text-base leading-7 text-paper/70">ABCD Ingénierie étudie les structures bois et métal pour des opérations neuves ou sur l'existant. Les besoins de vérification, de dimensionnement et les documents attendus sont précisés en fonction des travaux et des responsabilités de chaque intervenant.</p></div></section>
-    <article class="shell max-w-5xl py-12 md:py-20"><figure class="my-8 border border-ink/15 bg-white"><img id="Image6" src="https://placehold.co/1200x700/F8F7F4/202326?text=Image6" alt="Équipe de chantier consultant un détail structurel ou un ouvrage bois/métal, avec autorisation de diffusion." class="aspect-[16/8] w-full object-cover"><figcaption class="border-t border-ink/15 px-5 py-3 text-xs leading-5 text-steel">Équipe de chantier consultant un détail structurel ou un ouvrage bois/métal, avec autorisation de diffusion.</figcaption></figure><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Des études adaptées aux travaux</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">ABCD Ingénierie étudie les structures bois et métal pour des opérations neuves ou sur l'existant. Les besoins de vérification, de dimensionnement et les documents attendus sont précisés en fonction des travaux et des responsabilités de chaque intervenant.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Diagnostic et existant</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">En présence d'un désordre ou d'une structure existante à modifier, une mission peut porter sur la reconnaissance des éléments porteurs, l'analyse des données disponibles et des investigations définies au préalable. Les limites d'accès et d'information sont explicitées.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Conception et exécution</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Selon le périmètre, ABCD Ingénierie peut étudier les solutions structurelles envisagées et produire les calculs ou documents techniques convenus pour préparer l'exécution. Ces documents ne remplacent pas les plans et obligations relevant des autres intervenants.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Informations utiles pour démarrer</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Préciser les travaux, le calendrier, les éléments concernés, les plans ou notes disponibles et les points techniques à vérifier.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel"><a class="text-copper underline underline-offset-4" href="/contact.html"><strong>CTA :</strong> <code>Parler de vos travaux</code> <span aria-hidden="true">↗</span></a></p></article>
-    <section class="bg-oak py-14"><div class="shell flex flex-col gap-6 md:flex-row md:items-end md:justify-between"><div><p class="text-[10px] font-semibold uppercase tracking-label text-ink/70">Votre projet</p><h2 class="mt-3 text-3xl font-bold tracking-[-.05em]">Parlons de votre besoin.</h2></div><a class="button-primary bg-ink hover:bg-[#3c4044]" href="/contact.html">Contacter ABCD Ingénierie <span aria-hidden="true">↗</span></a></div></section>
+
+    <!-- Hero -->
+    <section class="bg-ink py-16 text-paper md:py-24">
+      <div class="shell grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-6">
+          <p class="eyebrow">Qui vous êtes</p>
+          <h1 class="mt-5 text-4xl font-bold leading-[.98] tracking-[-.06em] md:text-6xl">Entreprises</h1>
+          <p class="mt-7 max-w-[52ch] text-lg leading-8 text-paper/75">ABCD Ingénierie étudie les structures bois et métal pour des opérations neuves ou sur l’existant.</p>
+          <a class="button-primary mt-8" href="/contact.html">Parler de vos travaux <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="lg:col-span-6">
+          <img id="image1" src="https://placehold.co/1200x700/202326/F8F7F4?text=Entreprises" alt="Équipe de chantier consultant un détail structurel ou un ouvrage bois/métal" class="aspect-[4/3] w-full border border-paper/25 object-cover">
+        </figure>
+      </div>
+    </section>
+
+    <!-- Des études adaptées aux travaux -->
+    <section class="py-14 md:py-20">
+      <div class="shell rail">
+        <div class="rail-head">
+          <p class="eyebrow">01 · Études</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Des études adaptées aux travaux</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Les besoins de vérification, de dimensionnement et les documents attendus sont précisés en fonction des travaux et des responsabilités de chaque intervenant.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagnostic et existant -->
+    <section class="border-t border-ink/20 py-14 md:py-20">
+      <div class="shell rail">
+        <div class="rail-head">
+          <p class="eyebrow">02 · Existant</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Diagnostic et existant</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">En présence d’un désordre ou d’une structure existante à modifier, une mission peut porter sur la reconnaissance des éléments porteurs, l’analyse des données disponibles et des investigations définies au préalable.</p>
+          <p class="note mt-6">Les limites d’accès et d’information sont explicitées.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conception et exécution -->
+    <section class="border-t border-ink/20 py-14 md:py-20">
+      <div class="shell rail">
+        <div class="rail-head">
+          <p class="eyebrow">03 · Conception</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Conception et exécution</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Selon le périmètre, ABCD Ingénierie peut étudier les solutions structurelles envisagées et produire les calculs ou documents techniques convenus pour préparer l’exécution.</p>
+          <p class="note mt-6">Ces documents ne remplacent pas les plans et obligations relevant des autres intervenants.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Informations utiles pour démarrer -->
+    <section class="border-t border-ink/20 py-14 md:py-20">
+      <div class="shell rail">
+        <div class="rail-head">
+          <p class="eyebrow">Pour démarrer</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Informations utiles pour démarrer</h2>
+        </div>
+        <div class="rail-body">
+          <p class="text-[10px] font-semibold uppercase tracking-label text-steel">À préciser</p>
+          <ul class="checklist-cols mt-5">
+            <li>Les travaux envisagés</li>
+            <li>Le calendrier</li>
+            <li>Les éléments concernés</li>
+            <li>Les plans ou notes disponibles</li>
+            <li>Les points techniques à vérifier</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pourquoi nous -->
+    <section class="border-y border-ink/20 bg-[#eeece7] py-14 md:py-20">
+      <div class="shell">
+        <p class="eyebrow">04 · Pourquoi nous</p>
+        <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Pourquoi nous</h2>
+        <dl class="grid-cells mt-10 sm:grid-cols-2 xl:grid-cols-4">
+          <div>
+            <dt class="text-[10px] font-semibold uppercase tracking-label text-copper">01 · Bois &amp; métal</dt>
+            <dd class="mt-4 text-base leading-7 text-steel">Structures bois et métal, pour des opérations neuves ou sur l’existant.</dd>
+          </div>
+          <div>
+            <dt class="text-[10px] font-semibold uppercase tracking-label text-copper">02 · Périmètre ajusté aux travaux</dt>
+            <dd class="mt-4 text-base leading-7 text-steel">Vérifications, dimensionnements et documents précisés selon les travaux et les responsabilités de chaque intervenant.</dd>
+          </div>
+          <div>
+            <dt class="text-[10px] font-semibold uppercase tracking-label text-copper">03 · Limites explicitées</dt>
+            <dd class="mt-4 text-base leading-7 text-steel">Les limites d’accès et d’information sont explicitées avant l’étude.</dd>
+          </div>
+          <div>
+            <dt class="text-[10px] font-semibold uppercase tracking-label text-copper">04 · Pas de substitution</dt>
+            <dd class="mt-4 text-base leading-7 text-steel">Les documents produits ne remplacent pas les plans et obligations relevant des autres intervenants.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+    <!-- Questions fréquentes -->
+    <section class="border-t border-ink/20 py-14 md:py-20">
+      <div class="shell rail">
+        <div class="rail-head">
+          <p class="eyebrow">05 · Questions fréquentes</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Questions fréquentes</h2>
+        </div>
+        <div class="rail-body">
+          <div class="faq">
+            <details>
+              <summary>Sur quels types d’opérations intervenez-vous ?</summary>
+              <p class="answer">ABCD Ingénierie étudie les structures bois et métal pour des opérations neuves ou sur l’existant. Les besoins de vérification, de dimensionnement et les documents attendus sont précisés en fonction des travaux et des responsabilités de chaque intervenant.</p>
+            </details>
+            <details>
+              <summary>Que faire en présence d’un désordre ou d’une structure à modifier ?</summary>
+              <p class="answer">Une mission peut porter sur la reconnaissance des éléments porteurs, l’analyse des données disponibles et des investigations définies au préalable. Les limites d’accès et d’information sont explicitées.</p>
+            </details>
+            <details>
+              <summary>Quels documents pouvez-vous produire ?</summary>
+              <p class="answer">Selon le périmètre, ABCD Ingénierie peut étudier les solutions structurelles envisagées et produire les calculs ou documents techniques convenus pour préparer l’exécution.</p>
+            </details>
+            <details>
+              <summary>Les documents fournis remplacent-ils les plans des autres intervenants ?</summary>
+              <p class="answer">Ces documents ne remplacent pas les plans et obligations relevant des autres intervenants.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Appel à l'action -->
+    <section class="border-t border-ink/20 py-14 md:py-20">
+      <div class="shell grid gap-8 md:grid-cols-12 md:items-center">
+        <div class="md:col-span-8">
+          <p class="eyebrow">Appel à l’action</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Parler de vos travaux</h2>
+        </div>
+        <div class="md:col-span-4 md:text-right">
+          <a class="button-primary" href="/contact.html">Parler de vos travaux <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
   </main>
-  <abcd-footer></abcd-footer>
-  <script src="/components.js"></script>
+
+  <footer class="bg-ink py-12 text-paper">
+    <div class="shell grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <p class="text-2xl font-bold tracking-[-.07em]">ABCD <span class="text-copper">Ingénierie</span></p>
+        <p class="mt-3 text-[10px] font-semibold uppercase tracking-label text-paper/55">Bureau d’études structure bois &amp; métal</p>
+      </div>
+      <div class="grid gap-2 text-sm text-paper/70 sm:grid-cols-2 md:col-span-4">
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+        <a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+        <a class="hover:text-copper" href="/a-propos.html">À propos</a>
+        <a class="hover:text-copper" href="/contact.html">Contact</a>
+        <a class="hover:text-copper" href="/mentions-legales.html">Mentions légales</a>
+        <a class="hover:text-copper" href="/politique-de-confidentialite.html">Politique de confidentialité</a>
+      </div>
+      <div class="border-l border-paper/25 pl-5 text-xs leading-6 text-paper/65 md:col-span-3">
+        <p>Angers,&nbsp;Vannes</p></div>
+    </div>
+    <div class="shell mt-10 border-t border-paper/15 pt-5 text-[10px] font-medium uppercase tracking-[.12em] text-paper/45">ABCD Ingénierie, SAS · SIREN&nbsp;109 754 275&nbsp;· NAF 71.12B</div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('hidden');
+    });
+  </script>
+
 </body>
 </html>

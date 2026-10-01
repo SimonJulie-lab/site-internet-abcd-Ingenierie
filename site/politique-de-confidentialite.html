@@ -1,25 +1,363 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Le responsable du traitement des données recueillies par le formulaire de contact est ABCD Ingénierie, société par actions simplifiée, dont le siège social" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Politique de confidentialité — ABCD Ingénierie</title>
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="fee80ad3-228d-4069-9e42-6f5cad8a54b8"></script>
+  <meta name="description" content="Politique de confidentialité du site ABCD Ingénierie">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{ink:'#202326',steel:'#67686A',oak:'#C99358',copper:'#C96B1B',paper:'#F8F7F4'},fontFamily:{sans:['Montserrat','Arial','sans-serif']},letterSpacing:{label:'.16em'}}}}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style type="text/tailwindcss">@layer base{html{scroll-behavior:smooth}body{@apply bg-paper font-sans text-ink antialiased}a{@apply transition-colors duration-200}}@layer components{.shell{@apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16}.eyebrow{@apply text-[10px] font-semibold uppercase tracking-label text-copper}.button-primary{@apply inline-flex items-center gap-4 bg-copper px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514]}}</style>
+  <style type="text/tailwindcss">
+    @layer base {
+      html { scroll-behavior: smooth }
+      body { @apply bg-paper font-sans text-ink antialiased }
+      a { @apply transition-colors duration-200 }
+    }
+    @layer components {
+      .shell { @apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16 }
+      .eyebrow { @apply text-[10px] font-semibold uppercase tracking-label text-copper }
+      .button-primary { @apply inline-flex items-center gap-2 bg-copper px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514] }
+      .button-secondary { @apply inline-flex items-center gap-2 border border-ink px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-ink hover:border-copper hover:text-copper }
+      .panel { @apply border border-ink/20 bg-white }
+      /* Lecture : largeur de ligne confortable et hierarchie douce */
+      .lead { @apply max-w-[58ch] text-lg leading-8 text-steel md:text-xl md:leading-9 }
+      .flow { @apply max-w-[68ch] space-y-5 text-base leading-7 text-steel }
+      .flow > p { @apply max-w-[68ch] }
+      .measure { @apply max-w-[68ch] }
+      /* Trame editoriale : reperes a gauche, contenu a droite */
+      .rail { @apply grid gap-6 md:grid-cols-12 md:gap-10 }
+      .rail-head { @apply md:col-span-4 }
+      .rail-body { @apply md:col-span-7 md:col-start-6 }
+      /* Blocs de mise en avant */
+      .callout { @apply border-l-4 border-copper bg-white p-5 md:p-6 }
+      .note { @apply border-l-2 border-ink/25 pl-4 text-sm leading-6 text-steel }
+      .grid-cells { @apply grid gap-px border border-ink/20 bg-ink/20 }
+      .grid-cells > * { @apply bg-paper p-5 md:p-6 }
+      .spec { @apply border-t border-ink/15 pt-5 }
+      .spec dt { @apply text-[10px] font-semibold uppercase tracking-[.12em] text-steel }
+      .spec dd { @apply mt-2 text-base leading-7 text-ink }
+      /* Listes guidees */
+      .checklist { @apply space-y-3 }
+      .checklist-cols { @apply grid gap-3 sm:grid-cols-2 sm:gap-x-10 }
+      .checklist > li, .checklist-cols > li { @apply relative pl-6 text-base leading-7 text-steel }
+      .checklist > li::before, .checklist-cols > li::before { content: ""; position: absolute; left: 0; top: .62em; width: .45rem; height: .45rem; background: #C96B1B }
+      .checklist.is-ink > li::before, .checklist-cols.is-ink > li::before { background: #202326 }
+      .checklist.is-paper > li { @apply text-paper/75 }
+      .checklist.is-paper > li::before { background: #C96B1B }
+      /* Sommaire interne */
+      .toc { @apply grid gap-px border border-ink/20 bg-ink/20 sm:grid-cols-2 lg:grid-cols-3 }
+      .toc > * { @apply flex items-center justify-between gap-4 bg-paper px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] text-ink hover:text-copper }
+      /* Questions frequentes */
+      .faq { @apply border-t border-ink/20 }
+      .faq details { @apply border-b border-ink/20 }
+      .faq summary { @apply flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-bold leading-snug tracking-[-.03em] text-ink }
+      .faq summary::-webkit-details-marker { display: none }
+      .faq summary::after { content: "+"; margin-left: 1.5rem; flex: none; font-size: 1.25rem; font-weight: 400; line-height: 1.1; color: #C96B1B }
+      .faq details[open] summary::after { content: "–" }
+      .faq details[open] summary { color: #C96B1B }
+      .faq .answer { @apply max-w-[68ch] pb-6 text-base leading-7 text-steel }
+      /* Etapes numerotees */
+      .step { @apply bg-paper p-5 md:p-6 }
+      .step-num { @apply block text-[10px] font-semibold uppercase tracking-label text-copper }
+      /* Formulaire */
+      .field-label { @apply block text-[10px] font-semibold uppercase tracking-[.12em] text-ink }
+      .field-input { @apply mt-2 block w-full border border-ink/20 bg-white px-4 py-3 text-base text-ink placeholder:text-steel/60 focus:border-copper focus:outline-none }
+    }
+  </style>
 </head>
 <body>
-  <abcd-navbar></abcd-navbar>
+
+  <header class="border-b border-ink/20 bg-paper">
+    <div class="shell flex min-h-20 flex-wrap items-center justify-between gap-4 py-3">
+      <a href="/index.html" aria-label="ABCD Ingénierie — accueil" class="flex items-center gap-3">
+        <img alt="ABCD Ingénierie" class="block h-14 w-auto" src="https://cdn.stedzstudio.com/abcd-logo.png"></a>
+      <nav class="hidden flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[.12em] md:flex" aria-label="Navigation principale">
+        <a class="hover:text-copper" href="/index.html">Accueil</a>
+        <div class="group relative">
+          <button class="flex items-center gap-1 hover:text-copper" aria-expanded="false" aria-haspopup="true">QUI&nbsp;VOUS&nbsp;ÊTES<br><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="absolute left-0 top-full z-50 hidden w-[28rem] border border-ink/10 bg-paper p-5 group-hover:block group-focus-within:block">
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+              <a class="block py-1 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architectes &amp; maîtres d'œuvre</a>
+              <a class="block py-1 hover:text-copper" href="/entreprises.html">Entreprises</a>
+              <a class="block py-1 hover:text-copper" href="/particuliers.html">Particuliers</a>
+              <a class="block py-1 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+              <a class="block py-1 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+              <a class="block py-1 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+            </div>
+          </div>
+        </div>
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+        <a class="hover:text-copper" href="/domaines-intervention.html">Domaines d'intervention</a>
+        <a class="hover:text-copper" href="/a-propos.html">À propos</a>
+      </nav>
+      <a class="button-primary hidden shrink-0 md:inline-flex" href="/contact.html">Parler de votre projet <span aria-hidden="true">↗</span></a>
+      <button id="menu-toggle" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-ink/10 px-5 pb-5 pt-3 text-[10px] font-semibold uppercase tracking-[.12em] md:hidden" aria-label="Navigation mobile">
+      <a class="block py-2 hover:text-copper" href="/index.html">Accueil</a>
+      <span class="block py-2 text-steel">Qui vous êtes</span>
+      <a class="block py-1 pl-4 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architectes &amp; maîtres d'œuvre</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/entreprises.html">Entreprises</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/particuliers.html">Particuliers</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+      <a class="block py-2 hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+      <a class="block py-2 hover:text-copper" href="/domaines-intervention.html">Domaines d'intervention</a>
+      <a class="block py-2 hover:text-copper" href="/a-propos.html">À propos</a>
+      <a class="button-primary mt-3 inline-flex w-full justify-center" href="/contact.html">Parler de votre projet <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('hidden');
+    });
+  </script>
+
   <main>
-    <section class="bg-ink py-16 text-paper md:py-24"><div class="shell"><p class="eyebrow">ABCD Ingénierie · Politique de confidentialité</p><h1 class="mt-5 max-w-5xl text-4xl font-bold leading-[.98] tracking-[-.06em] md:text-6xl">Politique de confidentialité</h1><p class="mt-6 max-w-3xl text-base leading-7 text-paper/70">Le responsable du traitement des données recueillies par le formulaire de contact est <strong>ABCD Ingénierie</strong>, société par actions simplifiée, dont le siège social est situé au <strong>15 rue Evain, 49000 Angers</strong>.</p></div></section>
-    <article class="shell max-w-5xl py-12 md:py-20"><figure class="my-8 border border-ink/15 bg-white"><img id="Image14" src="https://placehold.co/1200x700/F8F7F4/202326?text=Image14" alt="Visuel institutionnel léger, identique à celui des autres pages légales si une image est retenue ; la page peut aussi être publiée sans photographie." class="aspect-[16/8] w-full object-cover"><figcaption class="border-t border-ink/15 px-5 py-3 text-xs leading-5 text-steel">Visuel institutionnel léger, identique à celui des autres pages légales si une image est retenue ; la page peut aussi être publiée sans photographie.</figcaption></figure><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Responsable du traitement</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Le responsable du traitement des données recueillies par le formulaire de contact est <strong>ABCD Ingénierie</strong>, société par actions simplifiée, dont le siège social est situé au <strong>15 rue Evain, 49000 Angers</strong>.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Données traitées</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Selon les champs remplis, ABCD Ingénierie traite les données d'identification et de contact (nom, prénom, adresse e-mail, téléphone, société), la commune du projet, le profil du demandeur, la nature et l'état d'avancement du besoin, ainsi que la description du projet. Les plans, photographies et autres documents joints peuvent également contenir des données personnelles.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Ne transmettez que les informations nécessaires à l'étude de votre demande. Évitez d'envoyer des données sensibles ou des informations personnelles concernant des tiers qui ne sont pas nécessaires au projet.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Le site utilise également Umami Cloud pour mesurer son audience. Selon la documentation d'Umami, l'outil relève notamment les pages consultées, les référents, le navigateur, le système d'exploitation, le type d'appareil et le pays ; Umami indique que le traceur n'utilise pas de cookies et anonymise les données. Les réglages effectifs de l'outil et les catégories de données effectivement reçues doivent être vérifiés dans le compte ABCD Ingénierie.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Finalités et bases juridiques</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Les données sont utilisées pour :</p><ul class="mt-5 list-disc space-y-3 pl-6 text-base leading-7 text-steel"><li>recevoir et traiter votre demande de contact ou de renseignement ;</li><li>comprendre votre projet et vous orienter vers une mission adaptée ;</li><li>préparer une proposition ou un devis lorsque vous en faites la demande ;</li><li>échanger avec vous au sujet de votre demande.</li></ul><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Lorsque vous demandez une proposition ou un devis, le traitement repose sur les mesures précontractuelles prises à votre demande. Pour les demandes générales, il repose sur l'intérêt légitime d'ABCD Ingénierie à répondre aux personnes qui la contactent et à assurer le suivi de leurs demandes.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">La mesure d'audience vise à comprendre la fréquentation et à améliorer le site. Elle repose sur l'intérêt légitime d'ABCD Ingénierie uniquement si le paramétrage utilisé remplit les conditions applicables à l'exemption de consentement et qu'un moyen d'opposition est disponible. Si ces conditions ne sont pas réunies, le traceur doit être activé uniquement après le recueil du consentement préalable.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Caractère obligatoire des champs</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Les champs identifiés comme obligatoires sont nécessaires pour qualifier et traiter votre demande. Si vous ne les renseignez pas, ABCD Ingénierie peut ne pas être en mesure de vous répondre ou d'évaluer le besoin. Les champs facultatifs et l'envoi de documents complémentaires restent à votre choix.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Durée de conservation</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Les données liées à une demande sont conservées pendant <strong>12 mois à compter de la clôture de la demande</strong>, puis supprimées ou archivées uniquement si une obligation légale ou la défense de droits en justice le justifie. Si la demande donne lieu à une relation contractuelle, les données nécessaires à cette relation sont conservées selon les durées applicables aux obligations contractuelles, comptables et légales.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Destinataires</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Les données sont accessibles aux personnes habilitées d'ABCD Ingénierie chargées de traiter votre demande. Elles peuvent être communiquées aux prestataires techniques qui interviennent pour le fonctionnement du formulaire, de la messagerie ou de l'hébergement, dans la mesure nécessaire à leurs services et sous réserve des garanties contractuelles applicables.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Pour la mesure d'audience, des données de navigation sont transmises à Umami Cloud, service exploité par Umami Software, Inc. Umami indique que ses serveurs sont situés dans l'Union européenne ou aux États-Unis selon la région du compte. La région configurée pour le compte ABCD Ingénierie et les garanties applicables aux éventuels transferts doivent être confirmées.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Les données du formulaire sont conservées selon la durée indiquée ci-dessus. La durée de conservation des données d'audience dépend du réglage du compte Umami et doit être précisée après vérification de cette configuration.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">La mesure d'audience est utilisée pour comprendre la fréquentation et améliorer le site. La mise en œuvre doit respecter les règles applicables aux traceurs et aux données personnelles ; si la configuration utilisée ne remplit pas les conditions d'exemption de consentement, le traceur ne doit être chargé qu'après recueil du consentement.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Vos droits</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Dans les conditions prévues par la réglementation, vous pouvez demander l'accès à vos données, leur rectification, leur effacement ou la limitation de leur traitement. Vous pouvez également vous opposer à un traitement fondé sur l'intérêt légitime et demander la portabilité des données lorsque ce droit s'applique.</p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Pour exercer vos droits, contactez le délégué à la protection des données (DPO) à l'adresse <a class="text-copper underline underline-offset-4" href="mailto:contact@abcd-ing.fr">contact@abcd-ing.fr</a>. Vous pouvez aussi introduire une réclamation auprès de la <a class="text-copper underline underline-offset-4" href="https://www.cnil.fr/fr/plaintes">CNIL</a>.</p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Contact du DPO</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel"><strong>Délégué à la protection des données (DPO)</strong></p><p class="mt-5 max-w-4xl text-base leading-8 text-steel">E-mail : <a class="text-copper underline underline-offset-4" href="mailto:contact@abcd-ing.fr">contact@abcd-ing.fr</a></p><h2 class="mt-14 border-t border-ink/15 pt-8 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Mise à jour</h2><p class="mt-5 max-w-4xl text-base leading-8 text-steel">Cette politique peut être modifiée pour refléter l'évolution du formulaire ou des traitements de données. La version publiée sur le site indique la date de sa dernière mise à jour.</p><blockquote class="my-6 border-l-4 border-copper bg-white px-6 py-4 text-sm leading-7 text-steel">À valider avant publication :** confirmer la dénomination légale complète et l'adresse du responsable du traitement ; confirmer que <code>contact@abcd-ing.fr</code> est bien le point de contact du DPO désigné ; vérifier la durée de 12 mois à partir de la clôture de la demande, les prestataires effectivement utilisés et les éventuels transferts de données hors de l'Espace économique européen. Si une autre base juridique, un usage ou un destinataire est mis en place, mettre à jour cette page et l'information affichée au formulaire.</blockquote></article>
-    <section class="bg-oak py-14"><div class="shell flex flex-col gap-6 md:flex-row md:items-end md:justify-between"><div><p class="text-[10px] font-semibold uppercase tracking-label text-ink/70">Votre projet</p><h2 class="mt-3 text-3xl font-bold tracking-[-.05em]">Parlons de votre besoin.</h2></div><a class="button-primary bg-ink hover:bg-[#3c4044]" href="/contact.html">Contacter ABCD Ingénierie <span aria-hidden="true">↗</span></a></div></section>
+    <section class="bg-ink text-paper py-16 md:py-24">
+      <div class="shell">
+        <p class="eyebrow">Protection des données</p>
+        <h1 class="text-4xl md:text-6xl font-bold leading-[.98] tracking-[-.06em] mt-4">Politique de confidentialité</h1>
+        <img id="image1" src="https://placehold.co/1200x500/202326/F8F7F4?text=Identité+du+bureau" alt="Visuel institutionnel du bureau ABCD Ingénierie" class="mt-8 h-64 w-full border border-paper/20 object-cover">
+      </div>
+      <div class="shell mt-12 border-t border-paper/20 pt-7">
+        <p class="eyebrow mb-5">Sommaire</p>
+        <div class="toc">
+          <a href="#responsable"><span>01 · Responsable du traitement</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#donnees"><span>02 · Données traitées</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#finalites"><span>03 · Finalités et bases juridiques</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#champs"><span>04 · Caractère obligatoire des champs</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#duree"><span>05 · Durée de conservation</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#destinataires"><span>06 · Destinataires</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#droits"><span>07 · Vos droits</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#dpo"><span>08 · Contact du DPO</span><span aria-hidden="true" class="text-copper">→</span></a>
+          <a href="#mise-a-jour"><span>09 · Mise à jour</span><span aria-hidden="true" class="text-copper">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell py-12 md:py-20">
+
+      <!-- 01 -->
+      <article id="responsable" class="rail border-t border-ink/20 pt-12 first:border-t-0 first:pt-0">
+        <div class="rail-head">
+          <p class="eyebrow">01 · Responsable</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Responsable du traitement</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Le responsable du traitement des données recueillies par le formulaire de contact est ABCD Ingénierie.</p>
+          <dl class="grid-cells mt-8 sm:grid-cols-2">
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-steel">Forme juridique</dt>
+              <dd class="mt-2 text-base leading-7 text-ink">Société par actions simplifiée.</dd>
+            </div>
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-steel">Siège social</dt>
+              <dd class="mt-2 text-base leading-7 text-ink">15 rue Evain, 49000 Angers.</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article id="donnees" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">02 · Données</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Données traitées</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Selon les champs remplis, ABCD Ingénierie traite :</p>
+          <ul class="checklist mt-6">
+            <li>Les données d’identification et de contact : nom, prénom, adresse e-mail, téléphone, société.</li>
+            <li>La commune du projet.</li>
+            <li>Le profil du demandeur.</li>
+            <li>La nature et l’état d’avancement du besoin.</li>
+            <li>La description du projet.</li>
+          </ul>
+          <p class="note mt-6">Les plans, photographies et autres documents joints peuvent également contenir des données personnelles.</p>
+
+          <div class="callout mt-8">
+            <p class="eyebrow">Bonne pratique</p>
+            <p class="mt-4 max-w-[68ch] text-base leading-7 text-steel">Ne transmettez que les informations nécessaires à l’étude de votre demande. Évitez d’envoyer des données sensibles ou des informations personnelles concernant des tiers qui ne sont pas nécessaires au projet.</p>
+          </div>
+
+          <h3 class="mt-10 text-lg font-bold tracking-[-.04em]">Mesure d’audience</h3>
+          <p class="flow mt-4">Le site utilise également Umami Cloud pour mesurer son audience. Selon la documentation d’Umami, l’outil relève notamment les pages consultées, les référents, le navigateur, le système d’exploitation, le type d’appareil et le pays ; Umami indique que le traceur n’utilise pas de cookies et anonymise les données.</p>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article id="finalites" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">03 · Finalités</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Finalités et bases juridiques</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Les données sont utilisées pour :</p>
+          <ul class="checklist mt-6">
+            <li>Recevoir et traiter votre demande de contact ou de renseignement.</li>
+            <li>Comprendre votre projet et vous orienter vers une mission adaptée.</li>
+            <li>Préparer une proposition ou un devis lorsque vous en faites la demande.</li>
+            <li>Échanger avec vous au sujet de votre demande.</li>
+          </ul>
+          <dl class="mt-10 grid gap-8 sm:grid-cols-2">
+            <div class="spec">
+              <dt>Proposition ou devis</dt>
+              <dd>Le traitement repose sur les mesures précontractuelles prises à votre demande.</dd>
+            </div>
+            <div class="spec">
+              <dt>Demandes générales</dt>
+              <dd>Le traitement repose sur l’intérêt légitime d’ABCD Ingénierie à répondre aux personnes qui la contactent et à assurer le suivi de leurs demandes.</dd>
+            </div>
+          </dl>
+          <p class="note mt-8">La mesure d’audience vise à comprendre la fréquentation et à améliorer le site. Selon la documentation d’Umami, le traceur utilisé n’utilise pas de cookies et anonymise les données.</p>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article id="champs" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">04 · Champs</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Caractère obligatoire des champs</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Les champs identifiés comme obligatoires sont nécessaires pour qualifier et traiter votre demande.</p>
+          <div class="callout mt-8">
+            <p class="max-w-[68ch] text-base leading-7 text-steel">Si vous ne les renseignez pas, ABCD Ingénierie peut ne pas être en mesure de vous répondre ou d’évaluer le besoin.</p>
+            <p class="mt-3 max-w-[68ch] text-base leading-7 text-steel">Les champs facultatifs et l’envoi de documents complémentaires restent à votre choix.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article id="duree" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">05 · Durée</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Durée de conservation</h2>
+        </div>
+        <div class="rail-body">
+          <dl class="grid-cells sm:grid-cols-2">
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-copper">Demande de contact</dt>
+              <dd class="mt-3 text-base leading-7 text-steel">12 mois à compter de la clôture de la demande.</dd>
+            </div>
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-copper">Relation contractuelle</dt>
+              <dd class="mt-3 text-base leading-7 text-steel">Durées applicables aux obligations contractuelles, comptables et légales.</dd>
+            </div>
+          </dl>
+          <p class="note mt-8">Les données liées à une demande sont supprimées ou archivées uniquement si une obligation légale ou la défense de droits en justice le justifie.</p>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article id="destinataires" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">06 · Destinataires</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Destinataires</h2>
+        </div>
+        <div class="rail-body">
+          <dl class="grid-cells">
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-steel">Personnes habilitées</dt>
+              <dd class="mt-2 text-base leading-7 text-steel">Les données sont accessibles aux personnes habilitées d’ABCD Ingénierie chargées de traiter votre demande.</dd>
+            </div>
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-steel">Prestataires techniques</dt>
+              <dd class="mt-2 text-base leading-7 text-steel">Elles peuvent être communiquées aux prestataires techniques qui interviennent pour le fonctionnement du formulaire, de la messagerie ou de l’hébergement, dans la mesure nécessaire à leurs services et sous réserve des garanties contractuelles applicables.</dd>
+            </div>
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-steel">Mesure d’audience — Umami Cloud</dt>
+              <dd class="mt-2 text-base leading-7 text-steel">Des données de navigation sont transmises à Umami Cloud, service exploité par Umami Software, Inc. Umami indique que ses serveurs sont situés dans l’Union européenne ou aux États-Unis selon la région du compte.</dd>
+            </div>
+          </dl>
+          <p class="note mt-8">Les données du formulaire sont conservées selon la durée indiquée ci-dessus.</p>
+        </div>
+      </article>
+
+      <!-- 07 -->
+      <article id="droits" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">07 · Droits</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Vos droits</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Dans les conditions prévues par la réglementation, vous pouvez demander :</p>
+          <ul class="checklist-cols mt-6">
+            <li>L’accès à vos données</li>
+            <li>Leur rectification</li>
+            <li>Leur effacement</li>
+            <li>La limitation de leur traitement</li>
+            <li>La portabilité des données lorsque ce droit s’applique</li>
+          </ul>
+          <p class="flow mt-8">Vous pouvez également vous opposer à un traitement fondé sur l’intérêt légitime.</p>
+          <p class="flow mt-5">Pour exercer vos droits, contactez le délégué à la protection des données (DPO) à l’adresse <a href="mailto:contact@abcd-ing.fr" class="text-copper hover:underline">contact@abcd-ing.fr</a>. Vous pouvez aussi introduire une réclamation auprès de la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer" class="text-copper hover:underline">CNIL</a>.</p>
+        </div>
+      </article>
+
+      <!-- 08 -->
+      <article id="dpo" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">08 · DPO</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Contact du DPO</h2>
+        </div>
+        <div class="rail-body">
+          <dl class="grid-cells sm:grid-cols-2">
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-steel">Délégué à la protection des données</dt>
+              <dd class="mt-2 text-base leading-7 text-ink">DPO</dd>
+            </div>
+            <div>
+              <dt class="text-[10px] font-semibold uppercase tracking-[.12em] text-steel">E-mail</dt>
+              <dd class="mt-2 text-base leading-7 text-ink"><a href="mailto:contact@abcd-ing.fr" class="text-copper hover:underline">contact@abcd-ing.fr</a></dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- 09 -->
+      <article id="mise-a-jour" class="rail mt-16 border-t border-ink/20 pt-12">
+        <div class="rail-head">
+          <p class="eyebrow">09 · Mise à jour</p>
+          <h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-ink md:text-3xl">Mise à jour</h2>
+        </div>
+        <div class="rail-body">
+          <p class="lead">Cette politique peut être modifiée pour refléter l’évolution du formulaire ou des traitements de données. La version publiée sur le site indique la date de sa dernière mise à jour.</p>
+        </div>
+      </article>
+
+    </section>
   </main>
-  <abcd-footer></abcd-footer>
-  <script src="/components.js"></script>
+
+  <footer class="bg-ink py-12 text-paper">
+    <div class="shell grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <p class="text-2xl font-bold tracking-[-.07em]">ABCD <span class="text-copper">Ingénierie</span></p>
+        <p class="mt-3 text-[10px] font-semibold uppercase tracking-label text-paper/55">Bureau d'études structure bois &amp; métal</p>
+      </div>
+      <div class="grid gap-2 text-sm text-paper/70 sm:grid-cols-2 md:col-span-4">
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+        <a class="hover:text-copper" href="/domaines-intervention.html">Domaines d'intervention</a>
+        <a class="hover:text-copper" href="/a-propos.html">À propos</a>
+        <a class="hover:text-copper" href="/contact.html">Contact</a>
+        <a class="hover:text-copper" href="/mentions-legales.html">Mentions légales</a>
+        <a class="hover:text-copper" href="/politique-de-confidentialite.html">Politique de confidentialité</a>
+      </div>
+      <div class="border-l border-paper/25 pl-5 text-xs leading-6 text-paper/65 md:col-span-3">
+        <p>Angers,&nbsp;Vannes</p></div>
+    </div>
+    <div class="shell mt-10 border-t border-paper/15 pt-5 text-[10px] font-medium uppercase tracking-[.12em] text-paper/45">ABCD Ingénierie, SAS · SIREN&nbsp;109 754 275&nbsp;· NAF 71.12B</div>
+  </footer>
+
 </body>
 </html>
