@@ -194,6 +194,14 @@
 
           <h3 class="mt-10 text-lg font-bold tracking-[-.04em]">Mesure d’audience</h3>
           <p class="flow mt-4">Le site utilise également Umami Cloud pour mesurer son audience. Selon la documentation d’Umami, l’outil relève notamment les pages consultées, les référents, le navigateur, le système d’exploitation, le type d’appareil et le pays ; Umami indique que le traceur n’utilise pas de cookies et anonymise les données.</p>
+
+          <div id="mesure-audience-opposition" class="callout mt-8">
+            <p class="eyebrow">Refuser la mesure d’audience</p>
+            <p class="mt-4 max-w-[68ch] text-base leading-7 text-steel">Cette mesure repose sur l’intérêt légitime à comprendre la fréquentation du site. Vous pouvez vous y opposer à tout moment et sans justification : le traceur n’envoie alors plus aucune donnée à Umami dans ce navigateur.</p>
+            <p class="mt-5"><button type="button" id="umami-opposition" class="button-secondary disabled:opacity-50">Refuser la mesure d’audience</button></p>
+            <p id="umami-etat" class="note mt-4" role="status" aria-live="polite">La mesure d’audience est active dans ce navigateur.</p>
+          </div>
+          <p class="note mt-4">Le réglage est enregistré dans le stockage local de ce navigateur : il ne vaut que pour ce navigateur et cet appareil, et peut être annulé avec le même bouton. Pour en savoir plus sur le traitement réalisé par l’outil, consultez la <a href="https://umami.is/privacy" target="_blank" rel="noopener noreferrer" class="text-copper hover:underline">politique de confidentialité d’Umami</a>.</p>
         </div>
       </article>
 
@@ -302,6 +310,7 @@
             <li>La portabilité des données lorsque ce droit s’applique</li>
           </ul>
           <p class="flow mt-8">Vous pouvez également vous opposer à un traitement fondé sur l’intérêt légitime.</p>
+          <p class="flow mt-5">Pour la mesure d’audience, cette opposition s’exerce directement depuis la <a href="#mesure-audience-opposition" class="text-copper hover:underline">section « Mesure d’audience »</a>, sans demande écrite préalable.</p>
           <p class="flow mt-5">Pour exercer vos droits, contactez le délégué à la protection des données (DPO) à l’adresse <a href="mailto:contact@abcd-ing.fr" class="text-copper hover:underline">contact@abcd-ing.fr</a>. Vous pouvez aussi introduire une réclamation auprès de la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer" class="text-copper hover:underline">CNIL</a>.</p>
         </div>
       </article>
@@ -359,6 +368,42 @@
     </div>
     <div class="shell mt-10 border-t border-paper/15 pt-5 text-[10px] font-medium uppercase tracking-[.12em] text-paper/45">ABCD Ingénierie, SAS · SIREN&nbsp;109 754 275&nbsp;· NAF 71.12B</div>
   </footer>
+
+  <script>
+    (function () {
+      var CLE = 'umami.disabled';
+      var bouton = document.getElementById('umami-opposition');
+      var etat = document.getElementById('umami-etat');
+      if (!bouton) return;
+
+      function oppositionActive() {
+        try { return localStorage.getItem(CLE) !== null } catch (e) { return null }
+      }
+
+      function afficher() {
+        var actif = oppositionActive();
+        if (actif === null) {
+          bouton.disabled = true;
+          bouton.textContent = 'Réglage indisponible';
+          etat.textContent = 'Ce navigateur n’autorise pas l’enregistrement du réglage. Vous pouvez exercer votre droit d’opposition par e-mail, à l’adresse contact@abcd-ing.fr.';
+          return;
+        }
+        bouton.textContent = actif ? 'Réactiver la mesure d’audience' : 'Refuser la mesure d’audience';
+        etat.textContent = actif
+          ? 'Vous avez refusé la mesure d’audience dans ce navigateur : aucune donnée de navigation n’est transmise à Umami.'
+          : 'La mesure d’audience est active dans ce navigateur.';
+      }
+
+      bouton.addEventListener('click', function () {
+        try {
+          if (oppositionActive()) { localStorage.removeItem(CLE) } else { localStorage.setItem(CLE, '1') }
+        } catch (e) {}
+        afficher();
+      });
+
+      afficher();
+    })();
+  </script>
 
 </body>
 </html>
