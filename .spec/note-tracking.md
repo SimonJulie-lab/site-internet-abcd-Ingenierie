@@ -39,6 +39,16 @@ Le réglage porte sur le navigateur et l'appareil de la personne, pas sur un com
 
 À noter : le traceur sait aussi respecter l'en-tête Do Not Track, mais uniquement si la balise porte `data-do-not-track="true"`. Sans cet attribut, le signal DNT du navigateur est ignoré — vérifié également.
 
+## Widget de retours Stedz Studio
+
+Toutes les pages chargent également `https://retours.stedzstudio.com/w.js` (script asynchrone en fin de `<body>`), ajouté par le studio pendant la phase de relecture. Le logo de l'en-tête est par ailleurs servi depuis `cdn.stedzstudio.com`.
+
+Comportement vérifié : sans paramètre `?r=<jeton>` dans l'URL, le script ne fait rien — aucun widget injecté, aucune écriture de stockage, aucune requête supplémentaire. Avec un jeton, il injecte une interface de commentaires et interroge `comments?token=…`. C'est ce widget qui produit les ancrages du type `.shell:nth-child(9) > .rail` relevés dans la fiche des retours.
+
+À retenir : même inerte, la balise provoque un appel à `retours.stedzstudio.com` à chaque page vue, qui reçoit donc l'adresse IP et le référent du visiteur. Ce point doit être soit déclaré dans la politique de confidentialité, soit supprimé du site : le script n'a pas sa place dans la version publiée une fois la relecture terminée.
+
+Historique : absent des commits `960d0ec` à `00a6485`, apparu dans l'arbre de travail pendant la phase de relecture, puis intégré au commit `ec13387` faute d'avoir été repéré plus tôt.
+
 ## Références
 
 - [Umami — collecte des données](https://docs.umami.is/docs/faq)
