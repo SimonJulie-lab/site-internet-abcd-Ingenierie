@@ -154,7 +154,7 @@
         </div>
 
         <div class="rail-body">
-          <form class="panel grid gap-8 p-6 md:p-8" name="contact" action="/merci.html" method="post" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+          <form class="panel grid gap-8 p-6 md:p-8" name="contact" action="/api/contact" method="post" enctype="multipart/form-data">
             <p class="hidden">
               <label>Ne remplissez pas ce champ si vous êtes un humain : <input name="bot-field" type="text" autocomplete="off"></label>
             </p>
@@ -372,7 +372,9 @@
       nav.classList.toggle('hidden');
     });
 
-    // Netlify refuse toute soumission de plus de 8 Mo : on previent avant l'envoi.
+    // La Function d'envoi (functions/api/contact.js) refuse les pieces
+    // jointes de plus de 8 Mo au total : on previent avant l'envoi pour
+    // eviter de faire patienter le visiteur pour rien.
     const formulaire = document.querySelector('form[name="contact"]');
     const alerte = document.getElementById('limite-pieces-jointes');
     const limite = 8 * 1024 * 1024;

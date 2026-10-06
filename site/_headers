@@ -1,0 +1,16 @@
+# ABCD Ingénierie — en-têtes HTTP (Cloudflare Pages)
+#
+# Équivalent du comportement actuel chez Netlify, qui envoyait déjà
+# Strict-Transport-Security. Cloudflare Pages n'ajoute aucun en-tête de
+# sécurité par défaut : sans ce fichier, le site perdrait le HSTS.
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Photos : contenu stable, mais remplaçable sous le même nom de fichier,
+# d'où une mise en cache d'une semaine seulement (pas de `immutable`).
+/photos/*
+  Cache-Control: public, max-age=604800

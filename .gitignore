@@ -1,0 +1,4 @@
+# Fichiers locaux à ne pas versionner
+.dev.vars
+.wrangler/
+node_modules/

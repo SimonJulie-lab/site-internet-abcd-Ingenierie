@@ -1,0 +1,14 @@
+# Configuration Cloudflare Pages — ABCD Ingénierie
+#
+# Le site publié est le contenu statique de `site/` (pas de build : les pages
+# HTML sont versionnées telles quelles) et les routes dynamiques sont dans
+# `functions/`, à la racine du dépôt.
+#
+# Ce fichier n'est pas obligatoire lorsque le projet est relié à GitHub et
+# configuré depuis le tableau de bord, mais il permet de lancer le site en
+# local avec `npx wrangler pages dev` et de garder la configuration dans le
+# dépôt. Le nom du projet doit correspondre à celui créé sur Cloudflare.
+
+name = "abcd-ing"
+compatibility_date = "2026-10-06"
+pages_build_output_dir = "site"

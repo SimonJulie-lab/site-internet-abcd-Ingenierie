@@ -213,27 +213,6 @@
       toggle.setAttribute('aria-expanded', !expanded);
       nav.classList.toggle('hidden');
     });
-
-    // Netlify refuse toute soumission de plus de 8 Mo : on previent avant l'envoi.
-    const formulaire = document.querySelector('form[name="contact"]');
-    const alerte = document.getElementById('limite-pieces-jointes');
-    const limite = 8 * 1024 * 1024;
-    if (formulaire && alerte) {
-      formulaire.addEventListener('submit', (ev) => {
-        const poids = Array.from(formulaire.elements).reduce((total, champ) => {
-          if (champ.type !== 'file') return total;
-          return total + Array.from(champ.files).reduce((t, fichier) => t + fichier.size, 0);
-        }, 0);
-        if (poids > limite) {
-          ev.preventDefault();
-          alerte.textContent = "Vos pièces jointes pèsent " + (poids / 1048576).toFixed(1).replace('.', ',')
-            + " Mo au total, au-delà des 8 Mo acceptés. Retirez un fichier ou joignez une version plus légère.";
-          alerte.hidden = false;
-        } else {
-          alerte.hidden = true;
-        }
-      });
-    }
   </script>
 
 </body>

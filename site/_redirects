@@ -1,19 +1,40 @@
-# ABCD Ingénierie — redirections
+# ABCD Ingénierie — redirections (Cloudflare Pages)
 #
 # Le blog et les réalisations sont retirés du site pour le moment.
 # Les règles renvoient vers l'accueil avec un code 302 (temporaire) : elles
 # pourront être supprimées telles quelles le jour où ces pages reviennent.
 #
-# Le "!" après le code de statut est indispensable. Des fichiers existent
-# réellement à ces chemins dans le dossier publié, et Netlify n'applique pas
-# une règle qui serait « shadowed » par un fichier existant.
-# https://docs.netlify.com/routing/redirects/rewrites-proxies#shadowing
+# Le "!" de Netlify (règle « forcée ») a été retiré : Cloudflare Pages ne
+# connaît pas cette syntaxe. Il est inutile ici, car contrairement à Netlify,
+# Cloudflare applique toujours les redirections, même si un fichier existe au
+# chemin demandé (« Redirects are always followed, regardless of whether or
+# not an asset matches the incoming request »).
+# https://developers.cloudflare.com/pages/configuration/redirects/
 #
-# Netlify ignore la barre oblique finale : /blog couvre aussi /blog/.
+# Cloudflare ignore la barre oblique finale : /blog couvre aussi /blog/.
+# À vérifier sur l'URL de préversion : /blog, /blog/, /realisations.html,
+# /realisations/ et /realisations doivent tous rediriger vers l'accueil.
 
-/blog/*             /  302!
-/blog               /  302!
+/blog/*             /  302
+/blog               /  302
 
-/realisations.html  /  302!
-/realisations/*     /  302!
-/realisations       /  302!
+/realisations.html  /  302
+/realisations/*     /  302
+/realisations       /  302
+
+# Sans cette règle, Cloudflare Pages applique ses « URL propres » : toute
+# demande de /page.html reçoit une redirection 308 vers /page. C'est
+# exactement le contraire du comportement de Netlify, qui servait /page.html
+# directement, et cela casserait l'ensemble du site : les 500 liens internes,
+# les balises canonical, le sitemap et l'historique Search Console pointent
+# tous vers les URL en .html. Une canonical qui redirige vers une autre URL
+# n'est plus auto-référente.
+#
+# La règle ci-dessous réécrit /page.html vers elle-même (statut 200 = service
+# direct, l'URL visible ne change pas) et rétablit ainsi le comportement
+# d'origine. Les règles statiques ci-dessus, plus spécifiques, continuent de
+# primer : /realisations.html reste bien une redirection vers l'accueil.
+/*.html             /:splat  200
+
+# Réécriture des URL .html
+/*.html   /:splat   200
