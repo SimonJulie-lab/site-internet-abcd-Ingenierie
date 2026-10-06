@@ -41,10 +41,34 @@ Cloudflare : ni la taille du corps de requête (100 Mo en offre Free, 413 au-del
 ni la mémoire d'une Function (128 Mo) ne sont atteintes ici. C'est bien le
 prestataire d'envoi qui plafonne.
 
-Autre différence à connaître : Brevo n'accepte qu'une liste d'extensions
-fermée. Les fichiers de CAO (`.dwg`, `.dxf`) et les archives `.rar` ou `.7z`
-n'en font pas partie, d'où la phrase ajoutée au formulaire invitant à les
-compresser en `.zip` (lui accepté).
+### Ce que Brevo accepte réellement (mesuré, pas supposé)
+
+L'API Brevo a été interrogée directement, avec la clé du compte réel, pour
+relever ses limites au lieu de se fier à sa documentation : les deux ne
+concordent pas.
+
+| Question | Documentation Brevo | Mesure sur l'API |
+|---|---|---|
+| Poids d'une pièce jointe | « la pièce jointe doit faire moins de 4 Mo » | **inexact** : un PDF de 14 Mio passe |
+| Poids du message | 20 Mo, pièces jointes comprises | **confirmé** : 14 Mio accepté, 19 Mo refusé (`400 MESSAGE_SIZE_EXCEEDED`, « Maximum mail size limit is 20MB ») |
+| Extensions acceptées | liste fermée | **confirmé**, et plus courte que prévu |
+
+Seize extensions qui semblent aller de soi ici sont en réalité **refusées** :
+`dwg`, `dxf`, `ifc`, `kmz`, `stl`, `skp`, `dgn` (CAO, BIM, géomatique),
+`rar`, `7z` (archives), `heic`, `heif`, `webp` (photos — or `.heic` est le
+format par défaut des iPhone), `svg`, `psd`, `eml`, `odg`, `odp`. À l'inverse,
+38 extensions ont été validées une par une : PDF, images JPG, PNG, TIFF, GIF,
+BMP, CGM, documents Word, Excel, PowerPoint et OpenDocument, CSV, TXT, XML,
+HTML, ZIP, TAR, ICS, MSG, PUB, EPS, et les formats audio et vidéo courants.
+
+Conséquence sur le formulaire : ces formats sont refusés **avant l'envoi**,
+côté navigateur (message immédiat dès le choix du fichier, plus l'attribut
+`accept` sur les trois champs) et côté Function (réponse 415 avec un message
+qui dit quoi faire : compresser en `.zip`, ou enregistrer la photo en JPG).
+Le fichier n'est donc jamais transféré pour rien, et Brevo n'est jamais
+appelé. Un filet de sécurité traduit en plus les deux réponses d'erreur de
+Brevo (`Unsupported file format`, `MESSAGE_SIZE_EXCEEDED`) au cas où cette
+liste évoluerait sans préavis.
 
 ## Phase 1 — migrer sans toucher au DNS ni à l'URL
 
@@ -125,33 +149,37 @@ sont changés chez Infomaniak (qui reste propriétaire du nom de domaine).
 ### 0. Recette locale — faite
 
 `npx wrangler pages dev` sert le site avec les mêmes fichiers (`_redirects`,
-`_headers`, `functions/`) que la production Cloudflare, sans aucun identifiant.
-Variables factices dans `.dev.vars` (fichier ignoré par git).
+`_headers`, `functions/`) que la production Cloudflare. Les variables de
+`.dev.vars` (fichier ignoré par git) portent d'abord une clé factice, puis la
+clé réelle du compte Brevo une fois celui-ci créé.
 
-**28 vérifications sur 28 passent** : HSTS, `nosniff` et `Referrer-Policy`
+**32 vérifications sur 32 passent** : HSTS, `nosniff` et `Referrer-Policy`
 pratiqués sur toutes les pages ; `Cache-Control` d'une semaine sur les photos ;
 les 5 URL `/blog` et `/realisations` redirigées vers l'accueil (y compris
 `/realisations.html`, alors que le fichier existe) ; les 17 pages `.html`
 servies en 200 ; `/sitemap.xml`, `/robots.txt` et `/merci.html` en 200 ; une
 adresse inconnue en 404 ; le formulaire en 405 en `GET`, 303 quand le champ
 piège est rempli, 400 sur champs manquants ou e-mail invalide, 413 au-delà de
-14 Mo. Une pièce jointe de 13 Mo est acceptée et un envoi valide atteint bien
-l'API Brevo (502 attendu avec une clé factice, et la page d'erreur affiche le
-lien vers le formulaire).
+14 Mo, 415 sur un format refusé par Brevo (`.dwg`, `.heic`, `.rar`). Une pièce
+jointe de 13 Mo est acceptée, et une de 14 Mio passe aussi.
 
-S'y ajoute une vérification du **corps JSON réellement adressé à Brevo**, faite
-hors réseau en interceptant `fetch` (21 contrôles) : endpoint, en-tête
-`api-key`, découpage de `CONTACT_FROM` en `sender.email` + `sender.name`,
-destinataires multiples, `replyTo`, objet du message, corps texte et HTML
-échappé, nom de pièce jointe translittéré (« plan été.pdf » → `plan-ete.pdf`),
-et contenu base64 identique octet pour octet au fichier d'origine. Les
-encodages par blocs ont également été comparés à `Buffer.toString('base64')`
-pour treize tailles, y compris non multiples de 3.
+S'y ajoutent deux vérifications qui ne dépendent plus du tout de la recette :
 
-Restent à vérifier en ligne, une fois le projet créé : l'envoi réel des e-mails
-avec les pièces jointes, les en-têtes sur l'URL publique, et le fait que
-`abcd-ing.pages.dev` n'entre pas dans l'index (balise `canonical` vers
-`abcd-ing.fr`).
+- le **corps JSON réellement adressé à Brevo**, intercepté hors réseau
+  (21 contrôles) : endpoint, en-tête `api-key`, découpage de `CONTACT_FROM` en
+  `sender.email` + `sender.name`, destinataires multiples, `replyTo`, objet du
+  message, corps texte et HTML échappé, nom de pièce jointe translittéré
+  (« plan été.pdf » → `plan-ete.pdf`) et contenu base64 identique octet pour
+  octet au fichier d'origine. Les encodages par blocs ont aussi été comparés à
+  `Buffer.toString('base64')` pour treize tailles, y compris non multiples de 3 ;
+- un **envoi réel** vers la boîte du compte, avec et sans pièce jointe, et un
+  ZIP de 5 Mo : Brevo répond 201, le compteur de crédits du compte passe de
+  300 à 295, ce qui confirme que les messages sont bien partis.
+
+Restent à vérifier en ligne, une fois le projet créé : l'envoi réel depuis la
+préversion, la réception des pièces jointes, les en-têtes sur l'URL publique,
+et le fait que `abcd-ing.pages.dev` n'entre pas dans l'index (balise
+`canonical` vers `abcd-ing.fr`).
 
 ### 1. Projet Cloudflare Pages
 
@@ -186,7 +214,7 @@ ce sous-domaine uniquement.
 
 - Aucun conflit avec la messagerie : les enregistrements demandés portent sur le sous-domaine d'envoi, jamais sur `abcd-ing.fr`. Le `MX` racine (`mta-gw.infomaniak.ch`) et le `SPF` Infomaniak restent intacts.
 - Offre gratuite Brevo : 300 e-mails par jour, sans commune mesure avec le trafic d'un formulaire de contact.
-- Plafond réel : 20 Mo par e-mail, pièces jointes comprises. Le formulaire en accepte 14 Mo, ce qui laisse la marge nécessaire à l'encodage base64 (+33 %).
+- Plafond réel : 20 Mo par e-mail, pièces jointes comprises, mesuré à l'appui. Le formulaire en accepte 14 Mo, ce qui laisse la marge nécessaire à l'encodage base64 (+33 %).
 
 ### 3. Recette avant bascule
 
@@ -195,7 +223,8 @@ ce sous-domaine uniquement.
 | `/blog`, `/blog/`, `/realisations`, `/realisations/`, `/realisations.html` | 302 vers l'accueil, malgré les fichiers présents |
 | Formulaire avec 1 à 3 pièces jointes (total < 14 Mo, dont un fichier de 13 Mo) | redirection vers `/merci.html`, e-mail reçu **avec** les pièces jointes, `Répondre` adressé au visiteur |
 | Formulaire avec > 14 Mo | message d'erreur 413, aucun envoi |
-| Pièce jointe `.dwg`, `.dxf`, `.rar` ou `.7z` | refusée par Brevo : vérifier que le message d'erreur reste compréhensible et que la mention « compressez en ZIP » est bien lue |
+| Pièce jointe `.dwg`, `.dxf`, `.heic`, `.rar` ou `.7z` | refusée avant envoi (415) : le message doit nommer le fichier fautif et indiquer quoi faire |
+| Pièce jointe `.zip` contenant un `.dwg` | acceptée, c'est le contournement proposé au visiteur |
 | Champ `bot-field` rempli | redirection vers `/merci.html`, aucun e-mail envoyé |
 | Champs obligatoires vides, e-mail invalide | page d'erreur avec lien vers le formulaire |
 | `/merci.html`, `/sitemap.xml`, `/robots.txt`, `/404.html` | servis normalement |
@@ -233,5 +262,5 @@ ce sous-domaine uniquement.
 
 - **Rien n'est envoyé si `BREVO_API_KEY`, `CONTACT_TO` ou `CONTACT_FROM` manquent** : la Function renvoie une page invitant à écrire directement à `contact@abcd-ing.fr`. Le formulaire ne casse donc pas silencieusement.
 - Les réponses d'erreur de Brevo sont journalisées (`console.error`) et consultables dans les logs temps réel du projet Pages.
-- Brevo n'accepte qu'une liste d'extensions fermée : un visiteur qui joint un `.dwg`, `.dxf`, `.rar` ou `.7z` verra un message d'échec. La consigne de compression en `.zip` est affichée dans le formulaire, à surveiller lors des premiers retours.
+- Brevo n'accepte qu'une liste fermée d'extensions. Le formulaire refuse donc lui-même les seize formats absents de cette liste (`.dwg`, `.heic`, `.rar`…) et propose de compresser en `.zip` — qui est accepté, y compris pour un plan de CAO ou une photo d'iPhone. Deux endroits portent la même liste (la Function et le script de la page) : les faire évoluer ensemble.
 - La Function ne réalise pas de limitation de débit : en l'absence de `TURNSTILE_SECRET`, seuls le champ piège et la validation des champs protègent le formulaire. Activer Turnstile si le spam apparaît.

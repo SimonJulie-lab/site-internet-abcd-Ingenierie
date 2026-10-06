@@ -22,6 +22,13 @@
  *
  * Le champ piège du formulaire (bot-field) reste actif : les robots qui le
  * remplissent reçoivent une réponse de succès, mais rien n'est envoyé.
+ *
+ * Les pièces jointes sont contrôlées avant l'envoi : poids total (14 Mo) et
+ * format, Brevo n'acceptant qu'une liste fermée d'extensions. Les formats de
+ * CAO (.dwg, .dxf, .ifc, .kmz), les archives .rar et .7z, les photos .heic
+ * des iPhone comme le .webp, le .svg, le .psd et le .eml n'en font pas
+ * partie : le formulaire invite à les compresser dans une archive .zip, qui
+ * est acceptée.
  */
 
 // Plafond des pièces jointes. Ce n'est pas qu'une question de confort : deux
@@ -38,6 +45,29 @@
 const LIMITE_PIECES_JOINTES = 14 * 1024 * 1024;
 const CHAMPS_OBLIGATOIRES = ['nom', 'email', 'commune', 'besoin', 'description'];
 const CHAMPS_PIECES_JOINTES = ['pieces-jointes-1', 'pieces-jointes-2', 'pieces-jointes-3'];
+
+// Extensions que Brevo accepte réellement. Ce n'est pas une précaution de
+// principe : l'API répond « 400 Unsupported file format: xxx » à tout ce qui
+// ne figure pas dans sa liste, et le visiteur n'aurait qu'une page d'erreur
+// générique. Cette liste a été relevée en interrogeant l'API : les trente-huit
+// premières ont été envoyées une par une, les formats audio et vidéo
+// supplémentaires sont ceux de la documentation Brevo.
+// À l'inverse, sont refusés et donc absents volontairement : dwg, dxf, ifc,
+// kmz, stl, skp, dgn, odg, odp (CAO, BIM, bureautique libre), rar, 7z
+// (archives), heic, heif, webp (photos, dont celles des iPhone), svg, psd,
+// eml.
+const EXTENSIONS_ACCEPTEES = new Set([
+  'pdf', 'txt', 'rtf', 'csv', 'xml', 'ics', 'msg', 'pub', 'eps', 'ez',
+  'doc', 'docx', 'docm', 'odt', 'xls', 'xlsx', 'ods', 'ppt', 'pptx',
+  'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tif', 'tiff', 'cgm',
+  'zip', 'tar', 'html', 'htm', 'shtml', 'css', 'mobi', 'pkpass',
+  'mp3', 'mp4', 'mov', 'wav', 'm4a', 'm4v', 'wma', 'ogg', 'flac',
+  'aif', 'aifc', 'aiff', 'avi', 'mkv', 'mpeg', 'mpg', 'wmv',
+]);
+
+const MESSAGE_FORMAT_REFUSE =
+  "Compressez le fichier dans une archive .zip (ou enregistrez la photo en JPG) " +
+  "et joignez l'archive à la place.";
 
 // Libellés de l'e-mail, dans l'ordre du formulaire.
 const CHAMPS = [
@@ -125,6 +155,28 @@ export async function onRequestPost({ request, env }) {
   if (!envoi.ok) {
     const detail = await envoi.text().catch(() => '');
     console.error('Brevo a refusé l’envoi', envoi.status, detail);
+
+    // Filet de sécurité : la liste d'extensions ci-dessus est relevée sur
+    // l'API réelle, elle peut évoluer sans préavis. Si Brevo refuse malgré
+    // tout, on traduit sa réponse plutôt que de renvoyer un « Envoi
+    // impossible » que le visiteur ne peut pas interpréter.
+    if (detail.includes('Unsupported file format')) {
+      const format = (detail.split('Unsupported file format:')[1] || '').replace(/[^A-Za-z0-9]/g, '');
+      return pageErreur(
+        415,
+        'Format de pièce jointe non accepté',
+        `Le service d'envoi n'accepte pas les fichiers au format .${echapper(format)}. ` +
+        MESSAGE_FORMAT_REFUSE
+      );
+    }
+    if (detail.includes('MESSAGE_SIZE_EXCEEDED')) {
+      return pageErreur(
+        413,
+        'Pièces jointes trop lourdes',
+        'Vos pièces jointes dépassent 14 Mo au total. Merci de retirer un fichier ou de joindre une version plus légère.'
+      );
+    }
+
     return pageErreur(
       502,
       'Envoi impossible',
@@ -159,6 +211,18 @@ async function construireMessage(donnees) {
   for (const nom of CHAMPS_PIECES_JOINTES) {
     const fichier = donnees.get(nom);
     if (!fichier || typeof fichier === 'string' || fichier.size === 0) continue;
+
+    // Le format d'abord : inutile de faire patienter le visiteur le temps du
+    // transfert d'un fichier que Brevo refusera de toute façon.
+    const extension = extensionDe(fichier.name);
+    if (!EXTENSIONS_ACCEPTEES.has(extension)) {
+      return pageErreur(
+        415,
+        'Format de pièce jointe non accepté',
+        `Le fichier « ${echapper(fichier.name)} » est au format .${echapper(extension)}, ` +
+        "que le service d'envoi n'accepte pas. " + MESSAGE_FORMAT_REFUSE
+      );
+    }
 
     // Le poids connu de FormData suffit : on refuse avant de lire les octets,
     // ce qui évite de charger en mémoire un envoi hors limite.
@@ -270,6 +334,12 @@ function nomFichierSur(brut, secours) {
     .replace(/^-+|-+$/g, '')
     .slice(-80);
   return nettoye || secours;
+}
+
+// Extension d'un nom de fichier, en minuscules et sans le point.
+function extensionDe(nom) {
+  const point = (nom || '').lastIndexOf('.');
+  return point === -1 ? '' : nom.slice(point + 1).toLowerCase();
 }
 
 function json(valeur) {
