@@ -35,6 +35,3 @@
 # d'origine. Les règles statiques ci-dessus, plus spécifiques, continuent de
 # primer : /realisations.html reste bien une redirection vers l'accueil.
 /*.html             /:splat  200
-
-# Réécriture des URL .html
-/*.html   /:splat   200

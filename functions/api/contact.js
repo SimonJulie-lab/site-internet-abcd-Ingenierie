@@ -4,15 +4,19 @@
  *
  * Remplace Netlify Forms (attribut data-netlify="true"), qui n'existe pas
  * sur Cloudflare. Le POST est reçu ici, transmis par e-mail via l'API
- * Resend, puis le visiteur est redirigé vers /merci.html (code 303, donc
+ * Brevo, puis le visiteur est redirigé vers /merci.html (code 303, donc
  * POST -> GET : le rechargement de la page ne renvoie pas le formulaire).
+ *
+ * Brevo est une société française et stocke ses données exclusivement dans
+ * l'Union européenne : aucun transfert hors UE pour les messages du
+ * formulaire. Voir MIGRATION-CLOUDFLARE.md.
  *
  * Variables d'environnement à définir sur le projet Pages
  * (Settings → Variables and Secrets) :
- *   RESEND_API_KEY    (secret) clé API Resend, portée « Sending access »
+ *   BREVO_API_KEY     (secret) clé API Brevo (SMTP & API → clés API v3)
  *   CONTACT_TO        destinataire(s), séparés par une virgule
- *   CONTACT_FROM      expéditeur vérifié chez Resend, par exemple
- *                     "Formulaire abcd-ing.fr <formulaire@send.abcd-ing.fr>"
+ *   CONTACT_FROM      expéditeur validé chez Brevo, par exemple
+ *                     "Formulaire abcd-ing.fr <formulaire@abcd-ing.fr>"
  *   TURNSTILE_SECRET  (facultatif) clé secrète Turnstile ; sans elle,
  *                     aucune vérification anti-robot n'est effectuée
  *
@@ -20,7 +24,18 @@
  * remplissent reçoivent une réponse de succès, mais rien n'est envoyé.
  */
 
-const LIMITE_PIECES_JOINTES = 8 * 1024 * 1024; // 8 Mo au total, comme avant
+// Plafond des pièces jointes. Ce n'est pas qu'une question de confort : deux
+// limites distinctes encadrent la valeur.
+//   - Brevo refuse les e-mails transactionnels dépassant 20 Mo, pièces
+//     jointes comprises, et l'encodage base64 gonfle le volume d'un tiers :
+//     14 Mo de fichiers donnent environ 19 Mo de message, donc sous la limite
+//     avec de la marge ;
+//   - une Function Cloudflare ne dispose que de 128 Mo de mémoire, or le
+//     fichier y transite (corps multipart, octets, base64, corps JSON).
+// À titre de repère, la limite du corps de requête Cloudflare est de 100 Mo
+// (offre Free) et la messagerie Infomaniak accepte 201 Mo par message : ni
+// l'une ni l'autre n'est la contrainte ici, c'est bien Brevo.
+const LIMITE_PIECES_JOINTES = 14 * 1024 * 1024;
 const CHAMPS_OBLIGATOIRES = ['nom', 'email', 'commune', 'besoin', 'description'];
 const CHAMPS_PIECES_JOINTES = ['pieces-jointes-1', 'pieces-jointes-2', 'pieces-jointes-3'];
 
@@ -40,7 +55,7 @@ const CHAMPS = [
 ];
 
 export async function onRequestPost({ request, env }) {
-  if (!env.RESEND_API_KEY || !env.CONTACT_TO || !env.CONTACT_FROM) {
+  if (!env.BREVO_API_KEY || !env.CONTACT_TO || !env.CONTACT_FROM) {
     return pageErreur(
       500,
       'Formulaire indisponible',
@@ -86,26 +101,30 @@ export async function onRequestPost({ request, env }) {
   const reponse = await construireMessage(donnees);
   if (reponse instanceof Response) return reponse;
 
-  const envoi = await fetch('https://api.resend.com/emails', {
+  const corps = corpsBrevo({
+    from: env.CONTACT_FROM,
+    to: env.CONTACT_TO.split(',').map((adresse) => adresse.trim()).filter(Boolean),
+    replyTo: email,
+    sujet: `Demande de contact — ${valeur(donnees, 'commune')} — ${valeur(donnees, 'nom')}`,
+    texte: reponse.texte,
+    html: reponse.html,
+    fichiers: reponse.fichiers,
+  });
+
+  // Succès attendu : 201 (message envoyé) ou 202 (message programmé).
+  const envoi = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
-      authorization: `Bearer ${env.RESEND_API_KEY}`,
+      'api-key': env.BREVO_API_KEY,
+      accept: 'application/json',
       'content-type': 'application/json',
     },
-    body: JSON.stringify({
-      from: env.CONTACT_FROM,
-      to: env.CONTACT_TO.split(',').map((adresse) => adresse.trim()).filter(Boolean),
-      reply_to: email,
-      subject: `Demande de contact — ${valeur(donnees, 'commune')} — ${valeur(donnees, 'nom')}`,
-      text: reponse.texte,
-      html: reponse.html,
-      attachments: reponse.piecesJointes,
-    }),
+    body: corps,
   });
 
   if (!envoi.ok) {
     const detail = await envoi.text().catch(() => '');
-    console.error('Resend a refusé l’envoi', envoi.status, detail);
+    console.error('Brevo a refusé l’envoi', envoi.status, detail);
     return pageErreur(
       502,
       'Envoi impossible',
@@ -135,29 +154,31 @@ async function construireMessage(donnees) {
   const cases = donnees.getAll('documents[]').map((v) => v.toString()).filter(Boolean);
   if (cases.length > 0) lignes.push(['Documents signalés', cases.join(', ')]);
 
-  const piecesJointes = [];
+  const fichiers = [];
   let poids = 0;
   for (const nom of CHAMPS_PIECES_JOINTES) {
     const fichier = donnees.get(nom);
     if (!fichier || typeof fichier === 'string' || fichier.size === 0) continue;
 
+    // Le poids connu de FormData suffit : on refuse avant de lire les octets,
+    // ce qui évite de charger en mémoire un envoi hors limite.
     poids += fichier.size;
     if (poids > LIMITE_PIECES_JOINTES) {
       return pageErreur(
         413,
         'Pièces jointes trop lourdes',
-        'Vos pièces jointes dépassent 8 Mo au total. Merci de retirer un fichier ou de joindre une version plus légère.'
+        'Vos pièces jointes dépassent 14 Mo au total. Merci de retirer un fichier ou de joindre une version plus légère.'
       );
     }
 
-    piecesJointes.push({
+    fichiers.push({
       filename: nomFichierSur(fichier.name, nom),
-      content: versBase64(await fichier.arrayBuffer()),
+      octets: await fichier.arrayBuffer(),
     });
   }
 
-  if (piecesJointes.length > 0) {
-    lignes.push(['Pièces jointes', piecesJointes.map((p) => p.filename).join(', ')]);
+  if (fichiers.length > 0) {
+    lignes.push(['Pièces jointes', fichiers.map((f) => f.filename).join(', ')]);
   }
 
   const texte = lignes.map(([libelle, contenu]) => `${libelle} :\n${contenu}`).join('\n\n');
@@ -171,7 +192,60 @@ async function construireMessage(donnees) {
     '</table>',
   ].join('');
 
-  return { texte, html, piecesJointes };
+  return { texte, html, fichiers };
+}
+
+/*
+ * Assemble le corps JSON attendu par l'API Brevo (POST /v3/smtp/email),
+ * morceau par morceau, et produit la base64 de chaque pièce jointe par blocs
+ * poussés directement dans le tableau.
+ *
+ * C'est ce qui permet d'accepter des fichiers volumineux : on ne garde jamais
+ * en mémoire au même moment les octets du fichier, une chaîne binaire
+ * intermédiaire, la base64 complète et une copie JSON de cette base64. Une
+ * Function Cloudflare ne dispose que de 128 Mo, cet assemblage compte.
+ */
+function corpsBrevo({ from, to, replyTo, sujet, texte, html, fichiers }) {
+  const expediteur = analyserExpediteur(from);
+  const morceaux = [
+    '{"sender":', destinataireJson(expediteur.email, expediteur.nom),
+    ',"to":[', to.map((adresse) => destinataireJson(adresse)).join(','), ']',
+    ',"replyTo":', destinataireJson(replyTo),
+    ',"subject":', json(sujet),
+    ',"textContent":', json(texte),
+    ',"htmlContent":', json(html),
+  ];
+
+  if (fichiers.length > 0) {
+    morceaux.push(',"attachment":[');
+    fichiers.forEach((fichier, index) => {
+      if (index > 0) morceaux.push(',');
+      morceaux.push('{"name":', json(fichier.filename), ',"content":"');
+      ajouterBase64(morceaux, fichier.octets);
+      morceaux.push('"}');
+    });
+    morceaux.push(']');
+  }
+
+  morceaux.push('}');
+  return morceaux.join('');
+}
+
+// Brevo attend l'adresse et le nom dans deux champs distincts. Le nom est
+// omis quand il n'y en a pas : un JSON.stringify(undefined) écrirait
+// littéralement « undefined » dans le corps de la requête.
+function destinataireJson(adresse, nom) {
+  const morceaux = ['{"email":', json(adresse)];
+  if (nom) morceaux.push(',"name":', json(nom));
+  morceaux.push('}');
+  return morceaux.join('');
+}
+
+// Accepte « Nom <adresse@domaine> » comme « adresse@domaine ».
+function analyserExpediteur(valeurExpediteur) {
+  const correspondance = String(valeurExpediteur).match(/^\s*(.*?)\s*<\s*([^>]+?)\s*>\s*$/);
+  if (correspondance) return { email: correspondance[2], nom: correspondance[1] };
+  return { email: String(valeurExpediteur).trim() };
 }
 
 /* ------------------------------------------------------------------ */
@@ -180,25 +254,39 @@ async function construireMessage(donnees) {
 
 function valeur(donnees, nom) {
   const brut = donnees.get(nom);
-  return brut === null || typeof brut !== 'string' ? '' : brut.trim();
+  // Les champs de formulaire reviennent avec des fins de ligne CRLF : on les
+  // normalise, sinon le corps HTML du message contient des « \r » isolés.
+  return brut === null || typeof brut !== 'string' ? '' : brut.replace(/\r\n/g, '\n').trim();
 }
 
-// Nom de fichier sûr pour la pièce jointe (Resend refuse certains caractères).
+// Nom de fichier sûr pour la pièce jointe (certains caractères sont refusés
+// par les passerelles de messagerie). Les accents sont translittérés plutôt
+// que supprimés, pour que « plan été.pdf » reste lisible chez le destinataire.
 function nomFichierSur(brut, secours) {
-  const nettoye = (brut || '').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(-80);
+  const nettoye = (brut || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^A-Za-z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(-80);
   return nettoye || secours;
 }
 
-// btoa() n'accepte que des chaînes : conversion par blocs pour rester
-// économe en mémoire sur les fichiers de plusieurs mégaoctets.
-function versBase64(buffer) {
-  const octets = new Uint8Array(buffer);
-  const bloc = 0x8000;
-  let binaire = '';
-  for (let i = 0; i < octets.length; i += bloc) {
-    binaire += String.fromCharCode.apply(null, octets.subarray(i, i + bloc));
+function json(valeur) {
+  return JSON.stringify(valeur);
+}
+
+// btoa() n'accepte que des chaînes : conversion par blocs, poussés dans le
+// tableau du corps de message sans jamais reconstituer la chaîne binaire
+// complète. Le bloc est un multiple de 3 pour qu'aucun bloc intermédiaire ne
+// produise de remplissage « = » au milieu de la base64.
+const BLOC_BASE64 = 32766;
+
+function ajouterBase64(morceaux, octets) {
+  const vue = new Uint8Array(octets);
+  for (let i = 0; i < vue.length; i += BLOC_BASE64) {
+    morceaux.push(btoa(String.fromCharCode.apply(null, vue.subarray(i, i + BLOC_BASE64))));
   }
-  return btoa(binaire);
 }
 
 function echapper(texte) {
