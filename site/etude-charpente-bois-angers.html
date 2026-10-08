@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étude et dimensionnement de charpente bois à Angers | ABCD</title>
+  <meta name="description" content="Étude de charpente bois à Angers : vérification des éléments, appuis et charges pour une construction, rénovation ou modification.">
+  <link rel="canonical" href="https://www.abcd-ing.fr/etude-charpente-bois-angers.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ABCD Ingénierie">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Étude et dimensionnement de charpente bois à Angers | ABCD">
+  <meta property="og:description" content="Étude de charpente bois à Angers : vérification des éléments, appuis et charges pour une construction, rénovation ou modification.">
+  <meta property="og:url" content="https://www.abcd-ing.fr/etude-charpente-bois-angers.html">
+  <meta property="og:image" content="https://www.abcd-ing.fr/photos/ferme-traditionnelle.webp">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://www.abcd-ing.fr/etude-charpente-bois-angers.html#service","name":"Étude et dimensionnement de charpente bois à Angers","serviceType":"Étude et dimensionnement de charpente bois à Angers","description":"Étude de charpente bois à Angers : vérification des éléments, appuis et charges pour une construction, rénovation ou modification.","url":"https://www.abcd-ing.fr/etude-charpente-bois-angers.html","provider":{"@id":"https://www.abcd-ing.fr/#organization"},"areaServed":[{"@type":"City","name":"Angers"},{"@type":"AdministrativeArea","name":"Maine-et-Loire"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.abcd-ing.fr/"},{"@type":"ListItem","position":2,"name":"Nos expertises","item":"https://www.abcd-ing.fr/nos-expertises.html"},{"@type":"ListItem","position":3,"name":"Étude et dimensionnement de charpente bois à Angers","item":"https://www.abcd-ing.fr/etude-charpente-bois-angers.html"}]}</script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="fee80ad3-228d-4069-9e42-6f5cad8a54b8"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{ink:'#202326',steel:'#67686A',oak:'#C99358',copper:'#C96B1B',paper:'#F8F7F4'},fontFamily:{sans:['Montserrat','Arial','sans-serif']},letterSpacing:{label:'.16em'}}}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer base {
+      html { scroll-behavior: smooth }
+      body { @apply bg-paper font-sans text-ink antialiased }
+      a { @apply transition-colors duration-200 }
+    }
+    @layer components {
+      .shell { @apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16 }
+      .eyebrow { @apply text-[10px] font-semibold uppercase tracking-label text-copper }
+      .button-primary { @apply inline-flex items-center gap-2 bg-copper px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514] }
+      .button-secondary { @apply inline-flex items-center gap-2 border border-ink px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-ink hover:border-copper hover:text-copper }
+      .panel { @apply border border-ink/20 bg-white }
+      /* Lecture : largeur de ligne confortable et hierarchie douce */
+      .lead { @apply max-w-[58ch] text-lg leading-8 text-steel md:text-xl md:leading-9 }
+      .flow { @apply max-w-[68ch] space-y-5 text-base leading-7 text-steel }
+      .flow > p { @apply max-w-[68ch] }
+      .measure { @apply max-w-[68ch] }
+      /* Trame editoriale : reperes a gauche, contenu a droite */
+      .rail { @apply grid gap-6 md:grid-cols-12 md:gap-10 }
+      .rail-head { @apply md:col-span-4 }
+      .rail-body { @apply md:col-span-7 md:col-start-6 }
+      /* Blocs de mise en avant */
+      .callout { @apply border-l-4 border-copper bg-white p-5 md:p-6 }
+      .note { @apply border-l-2 border-ink/25 pl-4 text-sm leading-6 text-steel }
+      .grid-cells { @apply grid gap-px border border-ink/20 bg-ink/20 }
+      .grid-cells > * { @apply bg-paper p-5 md:p-6 }
+      .spec { @apply border-t border-ink/15 pt-5 }
+      .spec dt { @apply text-[10px] font-semibold uppercase tracking-[.12em] text-steel }
+      .spec dd { @apply mt-2 text-base leading-7 text-ink }
+      /* Listes guidees */
+      .checklist { @apply space-y-3 }
+      .checklist-cols { @apply grid gap-3 sm:grid-cols-2 sm:gap-x-10 }
+      .checklist > li, .checklist-cols > li { @apply relative pl-6 text-base leading-7 text-steel }
+      .checklist > li::before, .checklist-cols > li::before { content: ""; position: absolute; left: 0; top: .62em; width: .45rem; height: .45rem; background: #C96B1B }
+      .checklist.is-ink > li::before, .checklist-cols.is-ink > li::before { background: #202326 }
+      .checklist.is-paper > li { @apply text-paper/75 }
+      .checklist.is-paper > li::before { background: #C96B1B }
+      /* Sommaire interne */
+      .toc { @apply grid gap-px border border-ink/20 bg-ink/20 sm:grid-cols-2 lg:grid-cols-3 }
+      .toc > * { @apply flex items-center justify-between gap-4 bg-paper px-5 py-4 text-[10px] font-semibold uppercase tracking-[.12em] text-ink hover:text-copper }
+      /* Questions frequentes */
+      .faq { @apply border-t border-ink/20 }
+      .faq details { @apply border-b border-ink/20 }
+      .faq summary { @apply flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-bold leading-snug tracking-[-.03em] text-ink }
+      .faq summary::-webkit-details-marker { display: none }
+      .faq summary::after { content: "+"; margin-left: 1.5rem; flex: none; font-size: 1.25rem; font-weight: 400; line-height: 1.1; color: #C96B1B }
+      .faq details[open] summary::after { content: "–" }
+      .faq details[open] summary { color: #C96B1B }
+      .faq .answer { @apply max-w-[68ch] pb-6 text-base leading-7 text-steel }
+      /* Etapes numerotees */
+      .step { @apply bg-paper p-5 md:p-6 }
+      .step-num { @apply block text-[10px] font-semibold uppercase tracking-label text-copper }
+      /* Formulaire */
+      .field-label { @apply block text-[10px] font-semibold uppercase tracking-[.12em] text-ink }
+      .field-input { @apply mt-2 block w-full border border-ink/20 bg-white px-4 py-3 text-base text-ink placeholder:text-steel/60 focus:border-copper focus:outline-none }
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-40 border-b border-ink/20 bg-paper">
+    <div class="shell flex min-h-20 flex-wrap items-center justify-between gap-4 py-3">
+      <a href="/index.html" aria-label="ABCD Ingénierie — accueil" class="flex items-center gap-3">
+        <img alt="ABCD Ingénierie" class="block h-14 w-auto" src="/photos/abcd-logo.webp"></a>
+      <nav class="hidden flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[.12em] md:flex" aria-label="Navigation principale">
+        <a class="hover:text-copper" href="/index.html">Accueil</a>
+        <div class="group relative">
+          <button class="flex items-center gap-1 hover:text-copper" aria-expanded="false" aria-haspopup="true">VOUS&nbsp;ÊTES&nbsp;?<br><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="absolute left-0 top-full z-50 hidden w-[28rem] border border-ink/10 bg-paper p-5 group-hover:block group-focus-within:block">
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+              <a class="block py-1 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architecte &amp; maître d’œuvre</a>
+              <a class="block py-1 hover:text-copper" href="/entreprises.html">Entreprise</a>
+              <a class="block py-1 hover:text-copper" href="/particuliers.html">Particulier</a>
+              <a class="block py-1 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+              <a class="block py-1 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+              <a class="block py-1 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+            </div>
+          </div>
+        </div>
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+        <a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+        <a class="hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a>
+      </nav>
+      <a class="button-primary ml-auto hidden shrink-0 md:inline-flex" href="/contact.html">Nous contacter, demandez une étude<span aria-hidden="true">↗</span></a>
+      <button id="menu-toggle" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-ink/10 px-5 pb-5 pt-3 text-[10px] font-semibold uppercase tracking-[.12em] md:hidden" aria-label="Navigation mobile">
+      <a class="block py-2 hover:text-copper" href="/index.html">Accueil</a>
+      <span class="block py-2 text-steel">Vous êtes ?</span>
+      <a class="block py-1 pl-4 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architecte &amp; maître d’œuvre</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/entreprises.html">Entreprise</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/particuliers.html">Particulier</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/judiciaire.html">Judiciaire</a>
+      <a class="block py-1 pl-4 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+      <a class="block py-2 hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+      <a class="block py-2 hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+      <a class="block py-2 hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a>
+      <a class="button-primary mt-3 inline-flex w-full justify-center" href="/contact.html">Nous contacter, demandez une étude<span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('hidden');
+    });
+  </script>
+
+  
+<main>
+  <nav class="shell py-5 text-xs text-steel" aria-label="Fil d’Ariane"><a class="hover:text-copper" href="/index.html">Accueil</a><span aria-hidden="true"> / </span><a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a><span aria-hidden="true"> / </span><span aria-current="page">Étude et dimensionnement de charpente bois à Angers</span></nav>
+  <section class="bg-ink text-paper"><div class="shell grid gap-10 py-16 md:py-24 lg:grid-cols-12 lg:items-end"><div class="lg:col-span-8"><p class="eyebrow">Étude structure · Angers</p><h1 class="mt-5 text-4xl font-bold leading-[.98] tracking-[-.06em] md:text-6xl">Étude et dimensionnement de charpente bois à Angers</h1><p class="mt-7 max-w-[58ch] text-lg leading-8 text-paper/75 md:text-xl">Pour une construction, une rénovation ou un aménagement de combles, ABCD Ingénierie étudie les éléments porteurs de votre charpente bois à Angers.</p><a class="button-primary mt-8" href="/contact.html">Parler de votre projet <span aria-hidden="true">↗</span></a></div><p class="max-w-sm text-sm leading-7 text-paper/65 lg:col-span-3 lg:col-start-10">ABCD Ingénierie accompagne les projets de structure à Angers et en Maine-et-Loire. La mission est définie selon l’ouvrage, les informations disponibles et les vérifications nécessaires.</p></div></section>
+  <section class="shell py-10 md:py-14"><figure class="overflow-hidden border border-ink/15"><img src="/photos/ferme-traditionnelle.webp" alt="Ferme traditionnelle en bois" class="block max-h-[34rem] w-full object-cover"><figcaption class="border-t border-ink/15 px-5 py-3 text-xs leading-5 text-steel">Ferme traditionnelle en bois</figcaption></figure></section>
+<section class="shell border-t border-ink/15 py-14 md:py-20"><div class="rail"><div class="rail-head"><p class="eyebrow">ABCD Ingénierie · Angers</p><h2 class="mt-4 text-3xl font-bold leading-tight tracking-[-.05em] md:text-4xl">Éléments étudiés</h2></div><div class="rail-body flow">
+<p>Selon le système constructif, l’étude peut porter sur les pannes, chevrons, fermes, arbalétriers, faîtage, assemblages, fixations et contreventement. Les portées, appuis, géométrie et charges sont pris en compte dans les vérifications prévues.</p>
+</div></div></section>
+<section class="shell border-t border-ink/15 py-14 md:py-20"><div class="rail"><div class="rail-head"><p class="eyebrow">ABCD Ingénierie · Angers</p><h2 class="mt-4 text-3xl font-bold leading-tight tracking-[-.05em] md:text-4xl">Projets concernés</h2></div><div class="rail-body flow">
+<p>Une étude peut accompagner la création ou la modification d’une charpente, l’aménagement de combles, une reprise de couverture ou l’ajout d’équipements en toiture. Pour l’existant, elle peut examiner une déformation ou aider à définir un renforcement. La faisabilité dépend de la structure observée et des informations disponibles.</p>
+</div></div></section>
+<section class="shell border-t border-ink/15 py-14 md:py-20"><div class="rail"><div class="rail-head"><p class="eyebrow">ABCD Ingénierie · Angers</p><h2 class="mt-4 text-3xl font-bold leading-tight tracking-[-.05em] md:text-4xl">Calculs et livrables</h2></div><div class="rail-body flow">
+<p>La mission peut comprendre un relevé, des vérifications de résistance et de stabilité, une note de calcul ou des principes de conception. Les calculs selon l’Eurocode 5 sont réalisés selon le périmètre contractuel ; aucune validation n’est implicite dans une simple observation.</p>
+</div></div></section>
+<section class="shell py-16 md:py-24"><div class="rail"><div class="rail-head"><p class="eyebrow">Vos questions</p><h2 class="mt-4 text-3xl font-bold tracking-[-.05em]">Questions fréquentes</h2></div><div class="rail-body faq">
+<details><summary>Peut-on vérifier une charpente avant d’aménager les combles ?</summary><p class="answer">Une étude peut examiner les éléments concernés et les charges du projet. Elle doit être cadrée selon la charpente accessible et les documents disponibles.</p></details>
+<details><summary>Une étude de charpente inclut-elle la couverture ?</summary><p class="answer">Elle porte sur la structure dans le périmètre convenu. L’examen de la couverture ou de son étanchéité relève d’une mission distincte si nécessaire.</p></details>
+<details><summary>Que transmettre pour dimensionner une charpente ?</summary><p class="answer">Les plans, portées, géométrie de toiture, matériaux, charges prévues et contraintes du projet aident à définir l’étude. Des relevés complémentaires peuvent être nécessaires.</p></details></div></div></section>
+<section class="shell border-t border-ink/15 py-14 md:py-20"><div class="rail"><div class="rail-head"><p class="eyebrow">ABCD Ingénierie · Angers</p><h2 class="mt-4 text-3xl font-bold leading-tight tracking-[-.05em] md:text-4xl">Secteur géographique</h2></div><div class="rail-body flow">
+<p>ABCD Ingénierie intervient à Angers et dans le Maine-et-Loire, avec étude possible dans les départements voisins selon le projet.</p>
+</div></div></section>
+  <section class="bg-ink py-16 text-paper md:py-24"><div class="shell rail"><div class="rail-head"><p class="eyebrow">Contact</p><h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Un projet à Angers ou en Maine-et-Loire ?</h2></div><div class="rail-body"><p class="text-xl font-bold leading-snug tracking-[-.04em] text-paper md:text-2xl">Décrivez votre besoin et les éléments disponibles ; nous pourrons cadrer la mission adaptée.</p><p class="mt-6 max-w-[68ch] text-base leading-7 text-paper/70">15 rue Evain, 49000 Angers — <a class="text-copper hover:underline" href="mailto:contact@abcd-ing.fr">contact@abcd-ing.fr</a></p><div class="mt-8 flex flex-wrap gap-3"><a class="button-primary" href="/contact.html">Demander une étude structure <span aria-hidden="true">↗</span></a><a class="button-secondary border-paper/40 text-paper hover:border-copper hover:text-copper" href="/nos-expertises.html">Nos expertises</a></div></div></div></section>
+</main>
+  <footer class="bg-ink py-12 text-paper">
+    <div class="shell grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <img src="/photos/abcd-logo.webp" alt="ABCD Ingénierie" class="h-20 w-auto md:h-24">
+        <p class="mt-3 text-[10px] font-semibold uppercase tracking-label text-paper/55">Bureau d’études structure bois &amp; métal</p>
+      </div>
+      <div class="grid gap-2 text-sm text-paper/70 sm:grid-cols-2 md:col-span-4">
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a>
+        <a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a>
+        <a class="hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a>
+        <a class="hover:text-copper" href="/contact.html">Contact</a>
+        <a class="hover:text-copper" href="/mentions-legales.html">Mentions légales</a>
+        <a class="hover:text-copper" href="/politique-de-confidentialite.html">Politique de confidentialité</a>
+      </div>
+      <div class="border-l border-paper/25 pl-5 text-xs leading-6 text-paper/65 md:col-span-3">
+        <p>15 rue Evain<br>49000 Angers</p>
+        <p class="mt-1">Région de Vannes et presqu’île de Rhuys</p>
+        <p class="mt-1"><a class="hover:text-copper" href="mailto:contact@abcd-ing.fr">contact@abcd-ing.fr</a></p>
+      </div>
+    </div>
+    <div class="shell mt-10 border-t border-paper/15 pt-5 text-[10px] font-medium uppercase tracking-[.12em] text-paper/45">ABCD Ingénierie, SAS · SIREN&nbsp;109 754 275&nbsp;· NAF 71.12B</div>
+  </footer>
+</body>
+</html>
