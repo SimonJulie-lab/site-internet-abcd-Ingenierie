@@ -12,3 +12,16 @@
 name = "abcd-ing"
 compatibility_date = "2026-10-06"
 pages_build_output_dir = "site"
+
+# Variables lues par functions/api/contact.js. Elles sont ici, et non dans le
+# tableau de bord, parce que `wrangler pages deploy` réécrit la configuration
+# de l'environnement de production à chaque envoi : toute variable « texte »
+# posée à la main serait effacée au déploiement suivant. Déclarées ici, elles
+# sont reposées automatiquement à chaque envoi.
+#
+# La clé Brevo, elle, est un secret : elle reste dans le tableau de bord
+# (Settings → Environment variables, Production et Preview) et n'a rien à
+# faire dans un fichier versionné.
+[vars]
+CONTACT_TO = "contact@abcd-ing.fr"
+CONTACT_FROM = "Formulaire abcd-ing.fr <contact@abcd-ing.fr>"

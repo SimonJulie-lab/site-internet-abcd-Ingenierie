@@ -225,11 +225,34 @@ déploiement Netlify habituel.
 ⚠️ **`wrangler.toml` devient la source de vérité.** Dès qu'un `wrangler.toml` contient la clé `pages_build_output_dir`, Cloudflare s'en sert pour configurer le projet et les champs correspondants du tableau de bord passent en lecture seule : « This file becomes the source of truth when used, meaning that you can not edit the same fields in the dashboard » ([Pages — Configuration](https://developers.cloudflare.com/pages/functions/wrangler-configuration/)). Le dépôt en contient un (`name = "abcd-ing"`, `pages_build_output_dir = "site"`) : les deux valeurs sont donc verrouillées sur la bonne configuration. Saisir les mêmes valeurs dans le tableau de bord ne nuit pas ; en saisir d'autres n'aurait pas d'effet. Ce mécanisme suppose le *v2 build system*, actif par défaut sur les projets créés aujourd'hui. Pour piloter entièrement depuis le tableau de bord, supprimer `wrangler.toml` : les réglages repris du tableau de bord s'appliquent au déploiement suivant.
 
 2. Définir les variables d'environnement (Production **et** Preview) :
-   - `BREVO_API_KEY` (secret) — clé API Brevo (`SMTP & API` → `API Keys` v3) ;
-   - `CONTACT_TO` — adresse(s) de réception, séparées par une virgule ;
-   - `CONTACT_FROM` — expéditeur validé chez Brevo, par exemple `Formulaire abcd-ing.fr <contact@abcd-ing.fr>` ;
+   - `CONTACT_TO` et `CONTACT_FROM` sont déjà déclarées dans `wrangler.toml` (section `[vars]`) : elles sont donc reposées automatiquement à chaque déploiement, et les champs correspondants du tableau de bord passent en lecture seule ;
+   - `BREVO_API_KEY` (**secret**) — clé API Brevo (`SMTP & API` → `API Keys` v3) — reste à saisir dans le tableau de bord : un secret n'a rien à faire dans un fichier versionné, et il y survit aux déploiements ;
    - `TURNSTILE_SECRET` (facultatif) — active la vérification anti-robot.
 Les variables d'environnement ne sont lues qu'au moment du déploiement : si elles sont saisies après le premier build, relancer ce déploiement (*Deployments* → *…* → *Retry deployment*), sinon la Function répond encore par une erreur 500.
+
+#### Envoi direct (`wrangler pages deploy`) — règles validées le 8 octobre 2026
+
+Tant que l'application GitHub n'est pas installée sur le compte propriétaire du dépôt, aucun projet relié à Git ne peut être créé. La voie « envoi direct » a donc servi à répéter la migration de bout en bout, sur un projet de test :
+
+```bash
+cd abcd-site      # à la racine du dépôt, pas dans site/ : c'est là que vit functions/
+npx wrangler pages deploy site --project-name abcd-ing-test --branch main
+```
+
+`--project-name` est nécessaire parce que `wrangler.toml` porte le nom définitif `abcd-ing`.
+
+Résultat : 51 fichiers, `_headers`, `_redirects` et le bundle des Functions envoyés, puis **59 vérifications sur 59** sur `https://abcd-ing-test.pages.dev` — en-têtes de sécurité, 5 redirections, les 28 pages en `.html` et sans extension, la 404 personnalisée, le 405 sur `GET /api/contact`, les refus 303 / 400 / 413 / 415, et un envoi réel avec pièce jointe, reçu à `contact@abcd-ing.fr`.
+
+Le nom `abcd-ing-test` laisse `abcd-ing` libre pour le projet du client : l'adresse `<projet>.pages.dev` est unique **tous comptes confondus**, et un nom déjà pris se voit suffixé de quelques caractères aléatoires. Vérifié : `abcd-ing.pages.dev` ne résout pas, le nom est encore disponible.
+
+Quatre pièges, tous constatés à l'essai :
+
+1. **`wrangler pages deploy` réécrit la configuration d'environnement de production** : les variables de type texte posées à la main sont effacées à chaque envoi — seules celles de type secret survivent. D'où le choix de déclarer `CONTACT_TO` et `CONTACT_FROM` dans `wrangler.toml`. Un projet relié à Git n'est pas concerné : son pipeline ne réécrit pas cette configuration.
+2. **« Retry deployment » est refusé sur un projet en envoi direct** : `You cannot retry a Direct Upload deployment. Retries are only possible for builds` (code 8000055). Les variables doivent donc être justes **avant** l'envoi, sans rattrapage possible ensuite.
+3. Par API, une variable secrète se déclare avec le type **`secret_text`**, et non `secret` : l'API répond sinon une erreur générique `8000000`, sans indiquer la cause.
+4. Par API, envoyer `deployment_configs` **dans le corps de création** du projet casse le projet : la création répond `8000000` alors que le projet est bel et bien créé, mais il devient ensuite illisible (sa lecture et la liste des projets renvoient aussi `8000000`). Créer avec `{"name": …, "production_branch": "main"}`, puis poser les variables par `PATCH`.
+
+Enfin, `/404.html` est servi avec le statut 200 : la règle de réécriture `/*.html /:splat 200` s'applique aussi à lui. Sans conséquence — cette URL n'est ni liée ni présente dans le sitemap — et une URL inconnue renvoie bien 404 avec cette page.
 
 3. Vérifier le déploiement `https://abcd-ing.pages.dev`. En phase 1, **rien d'autre ne bouge** : aucun DNS, aucune bascule.
 
