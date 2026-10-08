@@ -1,4 +1,4 @@
-# ABCD Ingénierie — https://abcd-ing.fr
+# ABCD Ingénierie — https://www.abcd-ing.fr
 # Autorise l'exploration de tout le site, sauf la page de confirmation
 # d'envoi du formulaire, qui n'a pas vocation à être indexée.
 
@@ -6,4 +6,4 @@ User-agent: *
 Allow: /
 Disallow: /merci.html
 
-Sitemap: https://abcd-ing.fr/sitemap.xml
+Sitemap: https://www.abcd-ing.fr/sitemap.xml

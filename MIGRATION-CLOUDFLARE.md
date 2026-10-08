@@ -1,8 +1,12 @@
 # Migration Cloudflare — ABCD Ingénierie
 
-Note de cadrage et procédure. Rien n'est encore déployé sur Cloudflare : les
-fichiers décrits en « Déjà fait dans le dépôt » sont prêts mais inutilisés tant
-que le site reste sur Netlify.
+Note de cadrage et procédure, tenue à jour.
+
+**État au 8 octobre 2026 : le site est en production sur Cloudflare Pages.**
+`www.abcd-ing.fr` est un `CNAME` vers le projet Pages et sert le site ;
+`abcd-ing.fr` redirige en 301 vers `www`. Netlify est retiré, du DNS comme du
+dépôt. Deux points restent ouverts : l'authentification du domaine chez Brevo
+(DKIM) et le retour de `p=reject` sur la politique DMARC.
 
 ## Décisions retenues
 
@@ -15,8 +19,10 @@ que le site reste sur Netlify.
 | Prestataire d'envoi | **Brevo** — société française, données traitées et stockées dans l'Union européenne |
 | Anti-robot | Champ piège conservé ; Turnstile activable sans code, en ajoutant `TURNSTILE_SECRET` |
 | E-mails | Restent chez **Infomaniak** — aucune modification prévue de l'hébergement mail |
-| Périmètre | **Phase 1 : préversion sur `abcd-ing.pages.dev`**, sans changement de DNS ni d'URL publique |
-| Bascule | Reportée, après recette complète sur l'URL de préversion |
+| Périmètre | **Migré** : `www.abcd-ing.fr` servi par Pages, apex `abcd-ing.fr` redirigé en 301 vers `www` |
+| URL canonique | **`https://www.abcd-ing.fr/`** — l'hôte réellement servi (voir §« Le domaine apex ») |
+| Bascule | Faite pour `www` (CNAME vers le projet Pages). L'apex reste hors de Cloudflare |
+| Reste à faire | DKIM chez Brevo, puis retour de `p=reject` sur DMARC |
 
 ## Prestataire d'envoi : Brevo
 
@@ -70,13 +76,13 @@ appelé. Un filet de sécurité traduit en plus les deux réponses d'erreur de
 Brevo (`Unsupported file format`, `MESSAGE_SIZE_EXCEEDED`) au cas où cette
 liste évoluerait sans préavis.
 
-## Phase 1 — migrer sans toucher au DNS ni à l'URL
+## Phase 1 — migrer sans toucher au DNS ni à l'URL *(faite)*
 
-C'est possible, à une condition : **en préversion uniquement**. Le site est
-publié sur `https://abcd-ing.pages.dev`, `abcd-ing.fr` continue d'être servi par
-Netlify, aucun enregistrement DNS ne bouge et les visiteurs ne voient aucune
-différence. Tout ce qui peut être validé l'est dans ce cadre : redirections,
-en-têtes, page 404, formulaire, photos, performances.
+Le site a d'abord été publié en préversion sur
+`site-internet-abcd-ingenierie.pages.dev`, sans qu'aucun enregistrement DNS ne
+bouge : les visiteurs ne voyaient aucune différence. Tout ce qui pouvait être
+validé dans ce cadre l'a été : redirections, en-têtes, page 404, formulaire,
+photos, performances.
 
 Ce qui n'est pas possible, en revanche, c'est de **basculer la production** sans
 toucher au DNS : `abcd-ing.fr` est un domaine apex, et Cloudflare Pages exige que
@@ -89,8 +95,23 @@ contournement raisonnable :
 ### Ce que la phase 1 ne couvre pas
 
 - **Pas de WAF, de cache ni de règles Cloudflare sur `abcd-ing.fr`** : ils ne s'appliqueraient qu'après la bascule du DNS.
-- **Le domaine d'envoi n'est pas encore authentifié chez Brevo.** Brevo accepte deux voies : authentifier le domaine (enregistrements DNS) ou **valider une simple adresse expéditeur par un lien reçu dans la boîte**. C'est la seconde qui sert en phase 1 : `contact@abcd-ing.fr` est une boîte Infomaniak existante, donc aucun enregistrement DNS n'est nécessaire pour tester de bout en bout, pièces jointes comprises. Contrepartie assumée : sans SPF ni DKIM la délivrabilité est moindre, ce qui est sans conséquence pour une recette et se corrige à la bascule.
-- **Le site existe en double** (Netlify sur `abcd-ing.fr`, Pages sur `abcd-ing.pages.dev`). Les balises `canonical` déjà en place pointent vers `https://abcd-ing.fr/`, ce qui neutralise le contenu dupliqué ; à confirmer en relevant les en-têtes du déploiement Pages (`X-Robots-Tag`).
+- **Le domaine d'envoi devait être authentifié chez Brevo, contrairement à ce
+  que supposait le cadrage.** La validation d'une simple adresse expéditeur par
+  lien ne suffit pas dès que le domaine publie une politique DMARC en `reject` :
+  tous les envois étaient refusés à la remise, sans que rien ne le signale côté
+  application. Le détail et la correction sont au §« Envoi des e-mails ».
+- **L'URL canonique a changé de support.** Le site était servi à la fois par
+  l'apex `abcd-ing.fr` et par `www` ; désormais seul `www` sert le site, l'apex
+  redirige. Les 52 URL absolues du site — balises `canonical`, `og:url`, JSON-LD,
+  `sitemap.xml` et ligne `Sitemap:` de `robots.txt` — pointent vers
+  `https://www.abcd-ing.fr/`. C'était indispensable : une canonique pointant vers
+  un apex qui redirige vers l'accueil ferait passer toutes les pages pour des
+  copies de la page d'accueil.
+- ⚠️ **La redirection de l'apex perd le chemin** : `https://abcd-ing.fr/contact.html`
+  répond `301` vers `https://www.abcd-ing.fr/`, la racine, et non vers la page
+  correspondante. À corriger dans le Manager Infomaniak (option de conservation
+  du chemin), faute de quoi tous les anciens liens indexés sur l'apex atterrissent
+  sur l'accueil.
 
 ## ⚠️ Blocage à trancher : le domaine apex
 
@@ -102,11 +123,12 @@ La doc Cloudflare est sans ambiguïté :
 
 Autrement dit : **avec les serveurs de noms conservés chez Infomaniak
 (`nsany1/2.infomaniak.com`), `abcd-ing.fr` ne peut pas être servi par Cloudflare
-Pages.** Seul un sous-domaine le peut, via un simple CNAME. Le domaine apex
-actuel (`A 75.2.60.5`, le load balancer Netlify) n'a pas d'équivalent côté
-Cloudflare : Pages n'expose pas d'adresse IP publique stable à mettre en `A`, et
-la validation d'un domaine personnalisé pour un apex suppose la zone dans le
-compte Cloudflare. L'astuce consistant à pointer un `ANAME` (que le DNS
+Pages.** Seul un sous-domaine le peut, via un simple CNAME — c'est la voie
+retenue pour `www`. Un domaine apex, lui, n'a pas d'équivalent côté Cloudflare :
+Pages n'expose pas d'adresse IP publique stable à mettre en `A`, et la validation
+d'un domaine personnalisé pour un apex suppose la zone dans le compte Cloudflare.
+L'apex est donc redirigé ailleurs, ici par le Manager Infomaniak. L'astuce
+consistant à pointer un `ANAME` (que le DNS
 Infomaniak sait créer) vers `<projet>.pages.dev` n'est pas un chemin supporté :
 le certificat et le rattachement du nom d'hôte échoueront.
 
@@ -118,7 +140,7 @@ La zone `abcd-ing.fr` est recréée à l'identique dans Cloudflare, puis les NS
 sont changés chez Infomaniak (qui reste propriétaire du nom de domaine).
 
 - ✅ Apex **et** `www` sur Pages, certificats automatiques, WAF, cache, règles Cloudflare, Turnstile.
-- ✅ URL canonique inchangée : `https://abcd-ing.fr/` (aucun impact SEO).
+- ⚠️ **L'URL canonique est désormais `https://www.abcd-ing.fr/`.** L'option A permet de revenir à l'apex, mais il faudrait alors reprendre les 52 URL du site ; le plus simple est de garder `www` comme hôte canonique et de faire rediriger l'apex vers lui. À trancher au moment de la bascule.
 - ✅ Les e-mails ne bougent pas : Infomaniak reste l'hébergeur mail, ses enregistrements `MX`, `SPF` et `DKIM` sont recopiés à l'identique dans Cloudflare.
 - ⚠️ La zone DNS est désormais administrée chez Cloudflare : **toute** évolution future des enregistrements (y compris mail) se fera là-bas, plus dans le Manager Infomaniak.
 - Retour arrière : remettre les NS Infomaniak chez le registraire (propagation ~1 h à 24 h).
@@ -129,7 +151,7 @@ sont changés chez Infomaniak (qui reste propriétaire du nom de domaine).
 `www` ailleurs.
 
 - ✅ Aucune modification des serveurs de noms.
-- ⚠️ L'apex doit être redirigé par un tiers : soit un site Netlify réduit à une redirection 301 (Netlify reste donc en place), soit la redirection d'URL du Manager Infomaniak.
+- ⚠️ L'apex doit être redirigé par un tiers : en pratique la redirection d'URL du Manager Infomaniak. C'est la configuration retenue, mais elle **perd le chemin** (voir la note ci-dessus) : à corriger dans le Manager.
 - ⚠️ **Changement d'URL canonique** : le site passe de `abcd-ing.fr` à `www.abcd-ing.fr`. Il faut reprendre les balises `canonical`, `og:url`, `sitemap.xml`, la ligne `Sitemap:` de `robots.txt`, puis déclarer la nouvelle propriété dans la Search Console. Perte de cache/WAF Cloudflare sur l'apex (qui ne fait plus que rediriger, donc impact limité).
 - Retour arrière : modifier un seul enregistrement `CNAME` / `A`.
 
@@ -177,19 +199,18 @@ S'y ajoutent deux vérifications qui ne dépendent plus du tout de la recette :
   300 à 295, ce qui confirme que les messages sont bien partis.
 
 Restent à vérifier en ligne, une fois le projet créé : l'envoi réel depuis la
-préversion, la réception des pièces jointes, les en-têtes sur l'URL publique,
-et le fait que `abcd-ing.pages.dev` n'entre pas dans l'index (balise
-`canonical` vers `abcd-ing.fr`).
+préversion, la remise de cet envoi (journal Brevo, pas la réponse de l'API), la
+réception des pièces jointes, les en-têtes sur l'URL publique, et le fait que
+`site-internet-abcd-ingenierie.pages.dev` n'entre pas dans l'index — ce que la
+balise `canonical`, désormais tournée vers `https://www.abcd-ing.fr/`, assure.
 
 ### 1. Projet Cloudflare Pages
 
-Les commits de migration partent sur **`main`**. Le dépôt n'a ni statut de
-commit, ni vérification, ni déploiement enregistré sur son dernier commit —
-une intégration Netlify reliée à GitHub en déposerait — et un
-`abcd-site-deploy.zip` est présent à la racine du dépôt : le déploiement Netlify
-se fait vraisemblablement à la main, un `push` sur `main` ne déclenche donc rien.
-Retour arrière si besoin : `git reset --hard c0933dc`, puis relancer le
-déploiement Netlify habituel.
+Les commits partent sur **`main`** : chaque `push` déclenche une construction et
+une mise en production Cloudflare. Après la bascule, il n'y a plus de second
+site à tenir à jour. Retour arrière : *Deployments* → choisir un déploiement
+antérieur → *Rollback* (le trafic revient sur cette version sans
+reconstruction), ou `git revert` si la faute est dans le dépôt.
 
 1. Créer le projet `abcd-ing`, relié au dépôt `SimonJulie-lab/site-internet-abcd-Ingenierie`. Réglages exacts de l'assistant (tableau de bord : *Create application* → *Pages* → *Connect to Git*) :
 
@@ -258,18 +279,58 @@ Enfin, `/404.html` est servi avec le statut 200 : la règle de réécriture `/*.
 
 ### 2. Envoi des e-mails (Brevo)
 
-**En phase 1, aucun enregistrement DNS n'est nécessaire** : créer l'adresse
-expéditeur `contact@abcd-ing.fr` dans Brevo, puis cliquer le lien de validation
-reçu dans la boîte Infomaniak. L'envoi fonctionne alors vers n'importe quel
-destinataire, sans SPF ni DKIM — délivrabilité moindre, sans conséquence pour
-une recette.
+**Le cadrage se trompait sur ce point, et la panne a mis une semaine à être
+vue** : elle ne se lit nulle part côté application. Il annonçait qu'en phase 1
+« aucun enregistrement DNS n'est nécessaire », la validation de l'adresse
+expéditeur par un lien reçu dans la boîte Infomaniak devant suffire, avec une
+délivrabilité moindre jugée sans conséquence. Or le journal Brevo affichait,
+pour **chaque** envoi :
 
-Pour la production, authentifier le domaine d'envoi dans Brevo (`Senders,
-Domains & Dedicated IPs` → `Domains`), par exemple `send.abcd-ing.fr`, et
-ajouter **exactement** les enregistrements affichés (DKIM et code Brevo), sur
-ce sous-domaine uniquement.
+```
+550 5.7.1 rejected by DMARC policy for abcd-ing.fr
+```
 
-- Aucun conflit avec la messagerie : les enregistrements demandés portent sur le sous-domaine d'envoi, jamais sur `abcd-ing.fr`. Le `MX` racine (`mta-gw.infomaniak.ch`) et le `SPF` Infomaniak restent intacts.
+Le message était accepté par Brevo (`201`) puis **refusé par le serveur du
+destinataire**. Trois enregistrements l'expliquent, relevés sur la zone :
+
+| Enregistrement | Valeur relevée | Conséquence |
+|---|---|---|
+| `SPF` de `abcd-ing.fr` | `v=spf1 include:spf.infomaniak.ch -all` | seuls les serveurs d'Infomaniak sont autorisés : Brevo ne l'est pas |
+| `_dmarc.abcd-ing.fr` | `v=DMARC1; p=reject;` | un échec d'alignement entraîne un **rejet**, pas une quarantaine |
+| `*._domainkey` | aucun | Brevo ne signe rien pour `abcd-ing.fr` |
+
+SPF non aligné, aucune signature DKIM, politique de rejet : le serveur
+d'Infomaniak appliquait la consigne. Aucun message du formulaire n'était arrivé
+dans la boîte, y compris ceux de la recette — dont l'arrivée avait été annoncée
+à tort, parce que le contrôle s'arrêtait à l'acceptation par Brevo et au statut
+HTTP de la Function, jamais à la remise.
+
+**La correction, en trois temps.**
+
+1. **Adopter la politique DMARC que Brevo affiche** :
+   `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com`, et poser au nom du
+domaine le `TXT` du code Brevo (`brevo-code:…`). Un seul `TXT` à ce nom : deux
+enregistrements rendraient la politique illisible. Effet immédiat — la remise
+fonctionne, vérifié par `delivered` puis `opened` dans le journal.
+2. **Authentifier le domaine** (`Senders, Domains & Dedicated IPs` → `Domains`)
+et poser l'enregistrement **DKIM** affiché. C'est lui qui rend DMARC passant,
+puisque l'alignement DKIM suffit à lui seul. Brevo doit alors répondre
+`authenticated: true`.
+3. **Puis remettre `p=reject`**, en gardant le `rua` :
+   `v=DMARC1; p=reject; rua=mailto:rua@dmarc.brevo.com`. Laisser `p=none` en
+production revient à laisser n'importe qui écrire au nom du domaine.
+
+Le SPF, lui, n'a pas été touché : la FAQ de Brevo précise que SPF et MX ne
+servent pas à authentifier un domaine sur IP mutualisée, ils ne concernent que
+les IP dédiées. Le DKIM suffit.
+
+**Pour la suite, l'ordre des contrôles change** : la remise se lit dans le
+journal Brevo (`GET /v3/smtp/statistics/events`), pas dans la réponse de l'API.
+Un `201` signifie « Brevo accepte », jamais « la boîte a reçu ».
+
+- Pas de conflit avec la messagerie : les enregistrements demandés concernent
+  l'authentification d'envoi, jamais la réception. Le `MX` racine
+  (`mta-gw.infomaniak.ch`) et le SPF Infomaniak sont restés intacts.
 - Offre gratuite Brevo : 300 e-mails par jour, sans commune mesure avec le trafic d'un formulaire de contact.
 - Plafond réel : 20 Mo par e-mail, pièces jointes comprises, mesuré à l'appui. Le formulaire en accepte 14 Mo, ce qui laisse la marge nécessaire à l'encodage base64 (+33 %).
 
@@ -299,11 +360,12 @@ ce sous-domaine uniquement.
    | TXT | `@` | `v=spf1 include:spf.infomaniak.ch -all` |
    | TXT | `@` | `google-site-verification=jdUSZPbGldUB-7OzW2hF8F1Er0ulvZs1F7LBWez5vDg` |
 
-   ⚠️ Il manque au minimum l'enregistrement `DKIM` (nom en `*._domainkey`) et
-   l'éventuel `_dmarc` : **récupérer un export complet de la zone Infomaniak
-   avant de changer les NS**, sans quoi la délivrabilité des e-mails se
-   dégradera. Les enregistrements `A`/`CNAME` de Netlify, eux, sont à supprimer
-   (c'est Pages qui les recréera).
+   ⚠️ **Récupérer un export complet de la zone Infomaniak avant de changer les
+   NS**, sans quoi la délivrabilité des e-mails se dégradera. Sont publiés
+   désormais, en plus des trois enregistrements ci-dessus : le code Brevo, le
+   DKIM (une fois l'authentification faite) et le `_dmarc`. Aucun enregistrement
+   Netlify ne subsiste dans la zone : `www` pointe vers le projet Pages, l'apex
+   vers la redirection Infomaniak. Il n'y a rien à recopier de ce côté.
 2. Ajouter le domaine personnalisé `abcd-ing.fr` au projet Pages (Cloudflare crée alors son propre `CNAME`), puis `www` en redirection vers l'apex.
 3. Changer les serveurs de noms chez le registraire pour ceux fournis par Cloudflare.
 4. Surveiller la validité du certificat et l'arrivée des e-mails du formulaire pendant 24 h.
@@ -311,8 +373,8 @@ ce sous-domaine uniquement.
 ### 5. Après la bascule
 
 - Politique de confidentialité : la page mentionne les « prestataires techniques » sans les nommer. Ajouter **Brevo** parmi les sous-traitants, avec la mention de l'hébergement dans l'Union européenne — c'est justement le motif du changement, la page décrit déjà ce niveau de détail pour Umami. Aucun transfert hors UE n'est à déclarer pour les messages du formulaire.
-- Search Console : conserver la propriété existante en option A ; en option B, ajouter la propriété `www` et soumettre le `sitemap.xml` mis à jour.
-- Netlify : ne résilier qu'après quelques jours de recette. Conserver la configuration le temps de la période de retour arrière.
+- Search Console : déclarer la propriété `https://www.abcd-ing.fr/` (nouvelle URL canonique) et y soumettre le `sitemap.xml` mis à jour ; suivre le changement d'hôte dans le rapport de couverture.
+- Netlify : retiré, du DNS comme du dépôt ; plus rien n'en dépend. Le filet de sécurité est désormais assuré par les déploiements Cloudflare, qui permettent de revenir sur une version antérieure en un clic.
 - Envisager une `Content-Security-Policy` : le site charge Tailwind et les polices Google depuis des CDN, la politique devra les autoriser explicitement.
 
 ## Points de vigilance
