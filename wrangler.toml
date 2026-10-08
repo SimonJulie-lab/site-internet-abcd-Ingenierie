@@ -21,7 +21,11 @@ pages_build_output_dir = "site"
 #
 # La clé Brevo, elle, est un secret : elle reste dans le tableau de bord
 # (Settings → Environment variables, Production et Preview) et n'a rien à
-# faire dans un fichier versionné.
+# faire dans un fichier versionné. Deux raisons, pas une : ce dépôt est
+# public, donc tout ce qui y est écrit est lisible par n'importe qui, et ce
+# fichier fait autorité sur les champs qu'il déclare — y inscrire la clé la
+# publierait et verrouillerait le champ correspondant dans le tableau de bord,
+# qui ne pourrait plus accueillir la vraie valeur.
 [vars]
 CONTACT_TO = "contact@abcd-ing.fr"
 CONTACT_FROM = "Formulaire abcd-ing.fr <contact@abcd-ing.fr>"
