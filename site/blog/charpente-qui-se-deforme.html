@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charpente qui se déforme : que faire ? — ABCD Ingénierie</title>
+  <link rel="canonical" href="https://www.abcd-ing.fr/blog/charpente-qui-se-deforme.html">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="fee80ad3-228d-4069-9e42-6f5cad8a54b8"></script>
+  <meta name="description" content="Charpente qui se déforme : quels signes observer, quelles causes sont possibles et quand demander un examen structurel ?">
+  <meta property="og:description" content="Repérez les signes d’une déformation de charpente et préparez les informations utiles avant un examen structurel.">
+  <meta property="og:type" content="article">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{ink:'#202326',steel:'#67686A',oak:'#C99358',copper:'#C96B1B',paper:'#F8F7F4'},fontFamily:{sans:['Montserrat','Arial','sans-serif']},letterSpacing:{label:'.16em'}}}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer base {
+      html { scroll-behavior: smooth }
+      body { @apply bg-paper font-sans text-ink antialiased }
+      a { @apply transition-colors duration-200 }
+    }
+    @layer components {
+      .shell { @apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16 }
+      .eyebrow { @apply text-[10px] font-semibold uppercase tracking-label text-copper }
+      .button-primary { @apply inline-flex items-center gap-2 bg-copper px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514] }
+      .lead { @apply max-w-[58ch] text-lg leading-8 text-steel md:text-xl md:leading-9 }
+      .flow { @apply max-w-[68ch] space-y-5 text-base leading-7 text-steel }
+      .rail { @apply grid gap-6 md:grid-cols-12 md:gap-10 }
+      .rail-head { @apply md:col-span-4 }
+      .rail-body { @apply md:col-span-7 md:col-start-6 }
+      .callout { @apply border-l-4 border-copper bg-white p-5 md:p-6 }
+      .checklist { @apply space-y-3 }
+      .checklist > li { @apply relative pl-6 text-base leading-7 text-steel }
+      .checklist > li::before { content: ""; position: absolute; left: 0; top: .62em; width: .45rem; height: .45rem; background: #C96B1B }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="sticky top-0 z-40 border-b border-ink/20 bg-paper">
+    <div class="shell flex min-h-20 flex-wrap items-center justify-between gap-4 py-3">
+      <a href="/index.html" aria-label="ABCD Ingénierie — accueil" class="flex items-center gap-3"><img alt="ABCD Ingénierie" class="block h-16 w-auto md:h-20" src="/photos/abcd-logo.webp"></a>
+      <nav class="hidden flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[.12em] md:flex" aria-label="Navigation principale">
+        <a class="hover:text-copper" href="/index.html">Accueil</a>
+        <div class="group relative">
+          <button class="flex items-center gap-1 hover:text-copper" aria-expanded="false" aria-haspopup="true">VOUS&nbsp;ÊTES&nbsp;?<br><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="absolute left-0 top-full z-50 hidden w-[28rem] border border-ink/10 bg-paper p-5 group-hover:block group-focus-within:block"><div class="grid grid-cols-2 gap-x-6 gap-y-2">
+            <a class="block py-1 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architecte &amp; maître d’œuvre</a><a class="block py-1 hover:text-copper" href="/entreprises.html">Entreprise</a><a class="block py-1 hover:text-copper" href="/particuliers.html">Particulier</a><a class="block py-1 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a><a class="block py-1 hover:text-copper" href="/judiciaire.html">Judiciaire</a><a class="block py-1 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+          </div></div>
+        </div>
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a><a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a><a class="hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a><a class="hover:text-copper" href="/blog/index.html">Blog</a>
+      </nav>
+      <div class="ml-auto hidden shrink-0 items-center gap-3 md:flex"><a class="inline-flex items-center border border-copper bg-copper/10 px-4 py-3 text-sm font-semibold tracking-normal text-ink hover:text-copper" href="tel:+33625054119">+33 6 25 05 41 19</a><a class="button-primary shrink-0" href="/contact.html">Nous contacter, demandez une étude<span aria-hidden="true">↗</span></a></div>
+      <button id="menu-toggle" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-ink/10 px-5 pb-5 pt-3 text-[10px] font-semibold uppercase tracking-[.12em] md:hidden" aria-label="Navigation mobile">
+      <a class="block py-2 hover:text-copper" href="/index.html">Accueil</a><span class="block py-2 text-steel">Vous êtes ?</span><a class="block py-1 pl-4 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architecte &amp; maître d’œuvre</a><a class="block py-1 pl-4 hover:text-copper" href="/entreprises.html">Entreprise</a><a class="block py-1 pl-4 hover:text-copper" href="/particuliers.html">Particulier</a><a class="block py-1 pl-4 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a><a class="block py-1 pl-4 hover:text-copper" href="/judiciaire.html">Judiciaire</a><a class="block py-1 pl-4 hover:text-copper" href="/secteur-public.html">Secteur public</a><a class="block py-2 hover:text-copper" href="/nos-expertises.html">Nos expertises</a><a class="block py-2 hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a><a class="block py-2 hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a><a class="block py-2 hover:text-copper" href="/blog/index.html">Blog</a><a class="my-2 inline-flex border border-copper bg-copper/10 px-3 py-2 text-xs font-semibold tracking-normal text-ink hover:text-copper" href="tel:+33625054119">+33 6 25 05 41 19</a><a class="button-primary mt-3 inline-flex w-full justify-center" href="/contact.html">Nous contacter, demandez une étude<span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('hidden');
+    });
+  </script>
+
+  <main>
+    <section class="bg-ink py-16 md:py-24"><div class="shell">
+      <p class="eyebrow mb-4">Diagnostics et bonnes pratiques</p>
+      <h1 class="max-w-[24ch] text-4xl font-bold leading-[.98] tracking-[-.06em] text-paper md:text-6xl">Charpente qui se déforme : que faire ?</h1>
+      <p class="mt-7 max-w-[58ch] text-lg leading-8 text-paper/75">Un creux dans la toiture ou une pièce de bois qui se déforme peut inquiéter. Voici quoi observer et pourquoi seul un examen de la structure peut aider à comprendre l’origine du désordre.</p>
+      <p class="mt-6 text-[10px] font-semibold uppercase tracking-[.12em] text-paper/50">17 novembre 2026 · Article</p>
+    </div></section>
+
+    <section class="py-8 md:py-12"><div class="shell"><img src="/photos/fleche-sur-panne.webp" alt="Flèche visible sur une panne de charpente en bois" class="block w-full border border-ink/20"></div></section>
+
+    <section class="shell pb-4"><div class="rail"><div class="rail-head"><p class="eyebrow">À retenir</p></div><div class="rail-body"><ul class="checklist">
+      <li>Une déformation visible est un signe à examiner, mais ne suffit pas à établir sa cause ni sa gravité.</li>
+      <li>Les causes possibles dépendent du type de charpente, de ses appuis, assemblages, charges et de l’état du bois.</li>
+      <li>Notez l’évolution et les travaux récents ; ne modifiez pas la charpente sans étude adaptée.</li>
+    </ul></div></div></section>
+
+    <article class="py-12 md:py-16"><div class="shell rail">
+      <div class="rail-head"><p class="eyebrow">Lecture</p><p class="mt-4 text-sm leading-6 text-steel">Des repères pour observer une charpente et préparer les bonnes questions avant un examen structurel.</p></div>
+      <div class="rail-body">
+        <section>
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Quels signes observer ?</h2>
+          <p class="flow mt-4">Depuis l’extérieur, regardez si la ligne du toit ou les rangs de couverture présentent un creux ou un décalage. Dans les combles, si l’accès est sûr, repérez les pièces qui semblent courbées, inclinées ou déplacées, ainsi que les assemblages qui paraissent ouverts. Des fissures nouvelles dans les murs ou les plafonds peuvent aussi être utiles à signaler. Ces indices orientent l’examen, mais ne permettent pas à eux seuls de conclure sur la stabilité de l’ensemble.</p>
+          <figure class="mt-8"><img src="/photos/charpente-sans-contreventement.webp" alt="Charpente en bois dont le contreventement est à examiner" class="block w-full border border-ink/20"></figure>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Pourquoi une charpente peut-elle se déformer ?</h2>
+          <p class="flow mt-4">Il n’existe pas une cause unique. Une pièce peut fléchir sous les charges qu’elle porte ; la forme, les dimensions ou les conditions d’appui influencent alors son comportement. Dans une charpente à fermettes, le flambement d’une pièce comprimée ou un contreventement insuffisant peut affecter la stabilité d’ensemble. Les assemblages peuvent aussi présenter du jeu. L’humidité, une altération du bois, une modification de la charpente ou l’ajout d’une charge peuvent également entrer dans l’analyse. Ces pistes sont à vérifier sur l’ouvrage concerné : elles ne se déduisent pas de la seule apparence.</p>
+          <p class="flow mt-4">L’Agence Qualité Construction distingue notamment les pièces fléchies des systèmes triangulés et relève le rôle possible du dimensionnement, des assemblages et de l’humidité. Pour les fermettes industrielles, elle décrit aussi des désordres liés au flambement ou au contreventement.</p>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Pourquoi l’œil seul ne permet pas de trancher</h2>
+          <p class="flow mt-4">Une déformation peut être ancienne, liée au fonctionnement de la structure ou traduire un désordre qui évolue. Pour l’interpréter, il faut connaître le principe de la charpente, les portées, les appuis, les assemblages, les charges et l’état des bois. Certaines parties peuvent être cachées ou difficiles d’accès. Une photographie peut aider à décrire la situation, mais elle ne montre pas toujours les éléments nécessaires à l’analyse.</p>
+          <div class="callout mt-8"><p class="eyebrow">Point de vigilance</p><p class="mt-4 max-w-[68ch] text-base leading-7 text-steel">Si une déformation apparaît brusquement, progresse rapidement ou s’accompagne d’une rupture ou d’un déplacement important, évitez la zone concernée et sollicitez rapidement un professionnel compétent. Ne coupez, ne déplacez et ne renforcez pas un élément sans étude adaptée.</p></div>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Quelles informations préparer ?</h2>
+          <ul class="checklist mt-4">
+            <li>Notez quand la déformation a été remarquée et si elle semble évoluer.</li>
+            <li>Prenez des photos d’ensemble et des détails visibles, à distance et sans vous mettre en danger.</li>
+            <li>Rassemblez les plans et documents de travaux disponibles.</li>
+            <li>Ajoutez les rapports antérieurs, s’il y en a.</li>
+            <li>Signalez les infiltrations, changements de couverture, aménagements des combles ou charges ajoutées.</li>
+          </ul>
+          <p class="flow mt-4">Selon le besoin et le périmètre convenu, un diagnostic structurel peut comprendre la reconnaissance de la charpente, l’examen de ses appuis, assemblages et éléments de stabilisation, puis des vérifications ou calculs. Les investigations et les livrables sont définis en fonction des accès et des informations disponibles ; ils peuvent inclure un rapport et des préconisations si la mission le prévoit.</p>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">En bref</h2>
+          <p class="flow mt-4">Une charpente qui se déforme mérite d’être observée et documentée, mais le signe visible ne révèle pas à lui seul la cause ni le niveau de risque. Si le phénomène est nouveau, évolue ou accompagne d’autres désordres, faites préciser le besoin d’examen avant d’entreprendre des travaux.</p>
+          <p class="flow mt-4">Pour aller plus loin : <a class="text-ink underline decoration-copper underline-offset-4 hover:text-copper" href="https://qualiteconstruction.com/ressource/fiches-pathologie-batiment/deformations-charpentes-bois-assemblees-chantier/" target="_blank" rel="noopener noreferrer">AQC, déformations des charpentes en bois assemblées sur chantier</a> et <a class="text-ink underline decoration-copper underline-offset-4 hover:text-copper" href="https://qualiteconstruction.com/wp-content/uploads/2026/Fiche-Pathologie-Batiment-C04-Deformations-Fermettes-Industrielles-AQC.pdf" target="_blank" rel="noopener noreferrer">AQC, déformations de fermettes industrielles (PDF)</a>.</p>
+        </section>
+      </div>
+    </div></article>
+
+    <section class="bg-ink py-16 md:py-24"><div class="shell rail">
+      <div class="rail-head"><p class="eyebrow">Contact</p><h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-paper md:text-3xl">Vous observez une déformation de charpente ?</h2></div>
+      <div class="rail-body"><p class="lead text-paper/75">Décrivez les signes observés et les documents dont vous disposez. ABCD Ingénierie pourra qualifier votre demande et vous indiquer les éléments utiles pour la suite.</p><p class="mt-6 text-base leading-7 text-paper/75"><a href="/contact.html" class="font-semibold text-white underline decoration-copper underline-offset-4 hover:text-copper">Appelez-nous</a> pour échanger sur votre situation.</p></div>
+    </div></section>
+  </main>
+
+  <footer class="bg-ink py-12 text-paper"><div class="shell grid gap-10 md:grid-cols-12">
+    <div class="md:col-span-5"><img src="/photos/abcd-logo.webp" alt="ABCD Ingénierie" class="h-20 w-auto md:h-24"><p class="mt-3 text-[10px] font-semibold uppercase tracking-label text-paper/55">Bureau d’études structure bois &amp; métal</p></div>
+    <div class="grid gap-2 text-sm text-paper/70 sm:grid-cols-2 md:col-span-4"><a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a><a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a><a class="hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a><a class="hover:text-copper" href="/blog/index.html">Blog</a><a class="hover:text-copper" href="/contact.html">Contact</a><a class="hover:text-copper" href="/mentions-legales.html">Mentions légales</a><a class="hover:text-copper" href="/politique-de-confidentialite.html">Politique de confidentialité</a></div>
+    <div class="border-l border-paper/25 pl-5 text-xs leading-6 text-paper/65 md:col-span-3"><p>15 rue Evain<br>49000 Angers</p><p class="mt-1">Région de Vannes et presqu’île de Rhuys</p><p class="mt-1"><a class="hover:text-copper" href="mailto:contact@abcd-ing.fr">contact@abcd-ing.fr</a></p></div>
+  </div><div class="shell mt-10 border-t border-paper/15 pt-5 text-[10px] font-medium uppercase tracking-[.12em] text-paper/45">ABCD Ingénierie, SAS · SIREN&nbsp;109 754 275&nbsp;· NAF 71.12B</div></footer>
+</body>
+</html>
