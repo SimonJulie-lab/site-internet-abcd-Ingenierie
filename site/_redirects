@@ -1,8 +1,6 @@
 # ABCD Ingénierie — redirections (Cloudflare Pages)
 #
-# Le blog et les réalisations sont retirés du site pour le moment.
-# Les règles renvoient vers l'accueil avec un code 302 (temporaire) : elles
-# pourront être supprimées telles quelles le jour où ces pages reviennent.
+# Les réalisations restent temporairement redirigées vers l'accueil.
 #
 # Le "!" de Netlify (règle « forcée ») a été retiré : Cloudflare Pages ne
 # connaît pas cette syntaxe. Il est inutile ici, car contrairement à Netlify,
@@ -10,13 +8,9 @@
 # chemin demandé (« Redirects are always followed, regardless of whether or
 # not an asset matches the incoming request »).
 # https://developers.cloudflare.com/pages/configuration/redirects/
-#
-# Cloudflare ignore la barre oblique finale : /blog couvre aussi /blog/.
-# À vérifier sur l'URL de préversion : /blog, /blog/, /realisations.html,
-# /realisations/ et /realisations doivent tous rediriger vers l'accueil.
+# L'ancienne URL provisoire de l'article redirige vers sa nouvelle adresse.
 
-/blog/*             /  302
-/blog               /  302
+/blog/post-temoin.html /blog/plancher-qui-saffaisse.html 301
 
 /realisations.html  /  302
 /realisations/*     /  302

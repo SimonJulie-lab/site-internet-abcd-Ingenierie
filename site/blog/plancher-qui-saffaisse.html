@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plancher qui s'affaisse : comment comprendre la situation ? — ABCD Ingénierie</title>
+  <link rel="canonical" href="https://www.abcd-ing.fr/blog/plancher-qui-saffaisse.html">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="fee80ad3-228d-4069-9e42-6f5cad8a54b8"></script>
+  <meta name="description" content="Plancher qui s'affaisse ou qui vibre : signes à observer, causes possibles et informations à réunir avant un examen structurel.">
+  <meta property="og:description" content="Des repères pour comprendre un plancher qui s'affaisse, observer son évolution et savoir quand demander un examen structurel.">
+  <meta property="og:type" content="article">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{ink:'#202326',steel:'#67686A',oak:'#C99358',copper:'#C96B1B',paper:'#F8F7F4'},fontFamily:{sans:['Montserrat','Arial','sans-serif']},letterSpacing:{label:'.16em'}}}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer base { html { scroll-behavior: smooth } body { @apply bg-paper font-sans text-ink antialiased } a { @apply transition-colors duration-200 } }
+    @layer components {
+      .shell { @apply mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16 }
+      .eyebrow { @apply text-[10px] font-semibold uppercase tracking-label text-copper }
+      .button-primary { @apply inline-flex items-center gap-2 bg-copper px-5 py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-white hover:bg-[#a95514] }
+      .lead { @apply max-w-[58ch] text-lg leading-8 text-steel md:text-xl md:leading-9 }
+      .flow { @apply max-w-[68ch] space-y-5 text-base leading-7 text-steel }
+      .rail { @apply grid gap-6 md:grid-cols-12 md:gap-10 }
+      .rail-head { @apply md:col-span-4 }
+      .rail-body { @apply md:col-span-7 md:col-start-6 }
+      .callout { @apply border-l-4 border-copper bg-white p-5 md:p-6 }
+      .checklist { @apply space-y-3 }
+      .checklist > li { @apply relative pl-6 text-base leading-7 text-steel }
+      .checklist > li::before { content: ""; position: absolute; left: 0; top: .62em; width: .45rem; height: .45rem; background: #C96B1B }
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-40 border-b border-ink/20 bg-paper">
+    <div class="shell flex min-h-20 flex-wrap items-center justify-between gap-4 py-3">
+      <a href="/index.html" aria-label="ABCD Ingénierie — accueil" class="flex items-center gap-3"><img alt="ABCD Ingénierie" class="block h-16 w-auto md:h-20" src="/photos/abcd-logo.webp"></a>
+      <nav class="hidden flex-wrap items-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[.12em] md:flex" aria-label="Navigation principale">
+        <a class="hover:text-copper" href="/index.html">Accueil</a>
+        <div class="group relative"><button class="flex items-center gap-1 hover:text-copper" aria-expanded="false" aria-haspopup="true">VOUS&nbsp;ÊTES&nbsp;?<br><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="absolute left-0 top-full z-50 hidden w-[28rem] border border-ink/10 bg-paper p-5 group-hover:block group-focus-within:block"><div class="grid grid-cols-2 gap-x-6 gap-y-2">
+          <a class="block py-1 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architecte &amp; maître d’œuvre</a><a class="block py-1 hover:text-copper" href="/entreprises.html">Entreprise</a><a class="block py-1 hover:text-copper" href="/particuliers.html">Particulier</a><a class="block py-1 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a><a class="block py-1 hover:text-copper" href="/judiciaire.html">Judiciaire</a><a class="block py-1 hover:text-copper" href="/secteur-public.html">Secteur public</a>
+        </div></div></div>
+        <a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a><a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a><a class="hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a><a class="hover:text-copper" href="/blog/index.html">Blog</a>
+      </nav>
+      <div class="ml-auto hidden shrink-0 items-center gap-3 md:flex"><a class="inline-flex items-center border border-copper bg-copper/10 px-4 py-3 text-sm font-semibold tracking-normal text-ink hover:text-copper" href="tel:+33625054119">+33 6 25 05 41 19</a><a class="button-primary shrink-0" href="/contact.html">Nous contacter, demandez une étude<span aria-hidden="true">↗</span></a></div>
+      <button id="menu-toggle" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-ink/10 px-5 pb-5 pt-3 text-[10px] font-semibold uppercase tracking-[.12em] md:hidden" aria-label="Navigation mobile">
+      <a class="block py-2 hover:text-copper" href="/index.html">Accueil</a><span class="block py-2 text-steel">Vous êtes ?</span><a class="block py-1 pl-4 hover:text-copper" href="/architectes-maitres-oeuvre.html">Architecte &amp; maître d’œuvre</a><a class="block py-1 pl-4 hover:text-copper" href="/entreprises.html">Entreprise</a><a class="block py-1 pl-4 hover:text-copper" href="/particuliers.html">Particulier</a><a class="block py-1 pl-4 hover:text-copper" href="/syndics.html">Syndic de Copropriété</a><a class="block py-1 pl-4 hover:text-copper" href="/judiciaire.html">Judiciaire</a><a class="block py-1 pl-4 hover:text-copper" href="/secteur-public.html">Secteur public</a><a class="block py-2 hover:text-copper" href="/nos-expertises.html">Nos expertises</a><a class="block py-2 hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a><a class="block py-2 hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a><a class="block py-2 hover:text-copper" href="/blog/index.html">Blog</a><a class="my-2 inline-flex border border-copper bg-copper/10 px-3 py-2 text-xs font-semibold tracking-normal text-ink hover:text-copper" href="tel:+33625054119">+33 6 25 05 41 19</a><a class="button-primary mt-3 inline-flex w-full justify-center" href="/contact.html">Nous contacter, demandez une étude<span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <script>const toggle=document.getElementById('menu-toggle');const nav=document.getElementById('mobile-nav');toggle.addEventListener('click',()=>{const expanded=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',!expanded);nav.classList.toggle('hidden');});</script>
+
+  <main>
+    <section class="bg-ink py-16 md:py-24"><div class="shell">
+      <p class="eyebrow mb-4">Diagnostics et bonnes pratiques</p>
+      <h1 class="max-w-[24ch] text-4xl font-bold leading-[.98] tracking-[-.06em] text-paper md:text-6xl">Plancher qui s'affaisse : comment comprendre la situation ?</h1>
+      <p class="mt-7 max-w-[58ch] text-lg leading-8 text-paper/75">Un sol en pente, souple ou qui vibre peut inquiéter. Ces signes méritent d’être décrits, mais ne révèlent pas seuls la cause du désordre. Voici comment observer la situation et préparer la suite.</p>
+      <p class="mt-6 text-[10px] font-semibold uppercase tracking-[.12em] text-paper/50">18 novembre 2026 · Article</p>
+    </div></section>
+
+    <section class="py-8 md:py-12"><div class="shell"><img src="/photos/plancher-a-renover.webp" alt="Plancher bois à examiner dans le cadre d’une rénovation" class="block w-full border border-ink/20"></div></section>
+
+    <section class="shell pb-4"><div class="rail"><div class="rail-head"><p class="eyebrow">À retenir</p></div><div class="rail-body"><ul class="checklist">
+      <li>Repérez où le plancher bouge, depuis quand et si le phénomène semble évoluer.</li>
+      <li>Une flexion ou une vibration peut être liée à plusieurs paramètres : structure, appuis, charges, état des matériaux ou humidité.</li>
+      <li>Une inspection visuelle ne permet pas de déterminer à elle seule la capacité portante du plancher.</li>
+    </ul></div></div></section>
+
+    <article class="py-12 md:py-16"><div class="shell rail">
+      <div class="rail-head"><p class="eyebrow">Lecture</p><p class="mt-4 text-sm leading-6 text-steel">Des repères pour décrire un plancher qui s’affaisse et savoir quelles informations préparer avant un examen.</p></div>
+      <div class="rail-body">
+        <section>
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Quels signes observer ?</h2>
+          <p class="flow mt-4">Un affaissement peut se manifester par une pente perceptible, un creux localisé ou un sol qui paraît plus souple à certains endroits. Des vibrations ressenties à la marche, des fissures dans les plafonds ou les cloisons, des jours qui apparaissent sous les plinthes ou des portes qui frottent peuvent aussi accompagner un mouvement. Ces signes ne prouvent pas qu’ils ont tous la même origine : notez simplement ce que vous constatez et où.</p>
+          <p class="flow mt-4">Essayez de préciser si le phénomène concerne une pièce entière, une bande entre deux murs ou un point près d’un appui. Indiquez quand vous l’avez remarqué et s’il a changé après une fuite, des travaux ou l’installation d’une charge nouvelle. Des photos d’ensemble et de détail peuvent aider à suivre son évolution.</p>
+          <figure class="mt-8"><img src="/photos/chevetre-voutains.webp" alt="Détail de la structure d’un plancher à examiner" class="block w-full border border-ink/20"></figure>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Quelles causes sont possibles ?</h2>
+          <p class="flow mt-4">Pour un plancher à solives, la flexion dépend notamment de la portée, de la section et de l’entraxe des solives, de leurs appuis, des assemblages et des charges qu’elles portent. Une modification de l’usage, l’ajout d’une cloison ou d’un équipement lourd, ou des travaux qui ont touché la structure peuvent modifier les sollicitations. Le bois peut aussi se déformer dans le temps sous une charge durable.</p>
+          <p class="flow mt-4">L’humidité mérite une attention particulière si des bois sont concernés : une fuite, une infiltration ou une humidification prolongée peut altérer les matériaux ou leurs appuis. Mais un plancher qui fléchit n’indique pas à lui seul une attaque du bois, pas plus qu’une vibration ne suffit à conclure à un défaut structurel. L’Agence Qualité Construction rappelle que les solives font partie des éléments fléchis et que les déformations du bois ont des causes diverses, dont les conditions d’humidité et les charges de longue durée.</p>
+          <p class="flow mt-4">Un revêtement fissuré ou décollé peut également être lié à la souplesse du support sans que ce seul désordre permette d’évaluer la structure. Il faut donc distinguer le symptôme visible de son origine, qui doit être recherchée sur l’ouvrage concerné.</p>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Pourquoi l’apparence ne suffit-elle pas ?</h2>
+          <p class="flow mt-4">Le plancher peut être constitué de matériaux et de systèmes différents : solives en bois, poutres, entrevous ou dalle. Certains éléments porteurs et leurs appuis sont cachés par le plafond ou le revêtement. Pour interpréter une déformation, il faut comprendre le principe de la structure, ses portées, ses appuis, les charges présentes et l’état des matériaux. Une photographie ou une mesure de niveau peut documenter un constat, mais ne donne pas à elle seule la capacité portante ni la cause du mouvement.</p>
+          <div class="callout mt-8"><p class="eyebrow">Point de vigilance</p><p class="mt-4 max-w-[68ch] text-base leading-7 text-steel">Si un mouvement apparaît brutalement, s’accentue rapidement, ou s’accompagne d’une rupture, d’un bruit inhabituel ou d’un déplacement important, évitez la zone et sollicitez rapidement un professionnel compétent. En cas de danger immédiat, éloignez les occupants et contactez les services d’urgence. N’entreprenez pas de travaux sur les éléments porteurs sans avis adapté.</p></div>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">Quelles informations réunir ?</h2>
+          <ul class="checklist mt-4">
+            <li>Les zones concernées et les signes visibles : pente, souplesse, vibrations, fissures ou désaffleurements.</li>
+            <li>La date d’apparition et l’évolution constatée, si vous pouvez la décrire.</li>
+            <li>Les plans, anciens rapports et documents relatifs aux travaux disponibles.</li>
+            <li>Les changements récents : nouvelle cloison, équipement, changement d’usage ou travaux sur le plancher.</li>
+            <li>Les traces éventuelles de fuite, d’infiltration ou d’humidité et les réparations réalisées.</li>
+          </ul>
+          <p class="flow mt-4">Prenez des photos sans déplacer les éléments ni accéder à une zone qui vous semble instable. Pour un premier échange, quelques vues d’ensemble, les plans disponibles et une description des travaux peuvent déjà aider à préciser la demande. Un bureau d’études définit ensuite le périmètre de son intervention selon la situation et les informations accessibles ; les relevés, investigations, calculs et livrables dépendent de la mission convenue.</p>
+        </section>
+
+        <section class="mt-12 border-t border-ink/15 pt-10">
+          <h2 class="text-2xl font-bold leading-tight tracking-[-.04em] md:text-3xl">En bref</h2>
+          <p class="flow mt-4">Un plancher qui s’affaisse ou qui vibre est un symptôme à documenter, pas un diagnostic. Son évolution, la structure porteuse, ses appuis, les charges et l’état des matériaux doivent être examinés ensemble pour comprendre la situation. Si vous préparez un projet de rénovation ou si le désordre évolue, rassemblez les informations disponibles et demandez un avis adapté avant d’intervenir sur la structure.</p>
+          <p class="flow mt-4">Pour approfondir : <a class="text-ink underline decoration-copper underline-offset-4 hover:text-copper" href="https://qualiteconstruction.com/ressource/fiches-pathologie-batiment/deformations-charpentes-bois-assemblees-chantier/" target="_blank" rel="noopener noreferrer">Agence Qualité Construction, déformations des charpentes en bois assemblées sur chantier</a> (la fiche évoque notamment les solives de plancher) et <a class="text-ink underline decoration-copper underline-offset-4 hover:text-copper" href="https://qualiteconstruction.com/wp-content/uploads/2024/05/Rapport-Observatoire-Pathologie-Sols-Carreles-AQC.pdf" target="_blank" rel="noopener noreferrer">AQC, Observatoire de la pathologie des sols carrelés</a> (flexibilité du plancher support).</p>
+        </section>
+      </div>
+    </div></article>
+
+    <section class="bg-ink py-16 md:py-24"><div class="shell rail">
+      <div class="rail-head"><p class="eyebrow">Contact</p><h2 class="mt-4 text-2xl font-bold leading-tight tracking-[-.04em] text-paper md:text-3xl">Votre plancher s’affaisse ?</h2></div>
+      <div class="rail-body"><p class="lead text-paper/75">Décrivez les signes observés, leur évolution et les documents dont vous disposez. ABCD Ingénierie pourra qualifier votre demande et vous indiquer les éléments utiles pour la suite.</p><p class="mt-6 text-base leading-7 text-paper/75"><a href="/contact.html" class="font-semibold text-white underline decoration-copper underline-offset-4 hover:text-copper">Appelez-nous</a> pour échanger sur votre situation.</p></div>
+    </div></section>
+  </main>
+
+  <footer class="bg-ink py-12 text-paper"><div class="shell grid gap-10 md:grid-cols-12">
+    <div class="md:col-span-5"><img src="/photos/abcd-logo.webp" alt="ABCD Ingénierie" class="h-20 w-auto md:h-24"><p class="mt-3 text-[10px] font-semibold uppercase tracking-label text-paper/55">Bureau d’études structure bois &amp; métal</p></div>
+    <div class="grid gap-2 text-sm text-paper/70 sm:grid-cols-2 md:col-span-4"><a class="hover:text-copper" href="/nos-expertises.html">Nos expertises</a><a class="hover:text-copper" href="/domaines-intervention.html">Domaines d’intervention</a><a class="hover:text-copper" href="/a-propos.html">Qui sommes-nous ?</a><a class="hover:text-copper" href="/blog/index.html">Blog</a><a class="hover:text-copper" href="/contact.html">Contact</a><a class="hover:text-copper" href="/mentions-legales.html">Mentions légales</a><a class="hover:text-copper" href="/politique-de-confidentialite.html">Politique de confidentialité</a></div>
+    <div class="border-l border-paper/25 pl-5 text-xs leading-6 text-paper/65 md:col-span-3"><p>15 rue Evain<br>49000 Angers</p><p class="mt-1">Région de Vannes et presqu’île de Rhuys</p><p class="mt-1"><a class="hover:text-copper" href="mailto:contact@abcd-ing.fr">contact@abcd-ing.fr</a></p></div>
+  </div><div class="shell mt-10 border-t border-paper/15 pt-5 text-[10px] font-medium uppercase tracking-[.12em] text-paper/45">ABCD Ingénierie, SAS · SIREN&nbsp;109 754 275&nbsp;· NAF 71.12B</div></footer>
+</body>
+</html>

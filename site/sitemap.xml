@@ -116,8 +116,23 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.abcd-ing.fr/blog/index.html</loc>
+    <lastmod>2026-11-17</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.abcd-ing.fr/blog/post-temoin.html</loc>
+    <lastmod>2026-11-17</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.abcd-ing.fr/blog/charpente-qui-se-deforme.html</loc>
     <lastmod>2026-11-17</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.abcd-ing.fr/blog/plancher-qui-saffaisse.html</loc>
+    <lastmod>2026-11-18</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>
